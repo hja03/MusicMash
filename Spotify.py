@@ -63,4 +63,8 @@ class Client:
 		params = params
 		params['limit'] = 50
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
+
+
+
+
 		return r.json()

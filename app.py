@@ -51,6 +51,7 @@ def play():
 	user1.get_top_x_artists(50)
 	user1.get_top_genres()
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
+	Compare.sortTracksByCompat(tracks, user1, user2)
 	for track in tracks['tracks']:
 		print(track['name'])
 	Compare.comparisonScore(user1, user2)
