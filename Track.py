@@ -3,7 +3,7 @@ import math
 
 
 class Track:
-	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID):
+	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None):
 		self.danceability = danceability
 		self.energy = energy
 		self.acouticness = acousticness
@@ -11,6 +11,7 @@ class Track:
 		self.trackID = trackID
 		# tempo starts in BPM / by 200 to standardise to roughly 0 - 1
 		self.tempo = tempo / 200
+		self.genre = genre
 
 	def compareSong(self, otherPersonsSong):
 		compatibility = 0  # 0-100
