@@ -8,22 +8,31 @@ class Client:
 	def __init__(self, access_token):
 		self.access_token = access_token
 		self.headers = {'Authorization': f'Bearer {self.access_token}', 'Content-Type': 'application/json'}
+		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
+		self.name = r.json()['display_name']
+		self.img = r.json()['images']
+		if self.img:
+			self.img = self.img['url']
+		else:
+			self.img = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
+		print(self.img)
 
-	def top_50_tracks(self):
+	def top_50_tracks(self, limit=50):
 		r = requests.get('https://api.spotify.com/v1/me/top/tracks', headers=self.headers,
-						 params={'limit': 50})
+						 params={'limit': limit})
 		self.tracks = []
+		self.track_names = []
 		for i in r.json()["items"]:
 			self.tracks.append(i['id'])
+			self.track_names.append(i['name'])
 		self.tracks_str = ",".join(self.tracks)
 		r = requests.get('http://api.spotify.com/v1/audio-features', headers=self.headers,
 						 params={'ids': self.tracks_str})
 		i = 0
 		self.track_objs = []
-		for track in r.json()['audio_features']:
+		for track, track_name in zip(r.json()['audio_features'], self.track_names):
 			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
-						  track['tempo'], track['id'])
-			i += 1
+							  track['tempo'], track['id'], name=track_name)
 			self.track_objs.append(track_obj)
 		return self.track_objs
 
@@ -38,6 +47,7 @@ class Client:
 		return self.artists
 
 	def get_top_genres(self):
+		self.get_top_x_artists(50)
 		genres = {}
 		if self.artists:
 			for artist in self.artists:
