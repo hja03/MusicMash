@@ -148,8 +148,10 @@ def compareScoreV3(user1, user2):
 			compats.append(t2.compareSong(t1))
 		total_compats.append(max(compats))
 
-	score = (sum(total_compats) / len(total_compats)) * 100
+	score = (sum(total_compats) / len(total_compats))
 	score = (0.3633 * math.exp(1.341 * score)) - 0.3664
+	score *= 100
+
 	return score
 
 def sortTracksByCompat(tracks_json_in, user1, user2):
