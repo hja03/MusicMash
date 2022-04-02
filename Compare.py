@@ -206,5 +206,4 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 				if track.trackID == json_track['id']:
 					actual_json_data.append(json_track)
 
-		print("HEREISMYSORTED JSON DATA \n\n\n\n\n\n")
-		print(actual_json_data)
+		return actual_json_data
