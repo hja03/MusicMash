@@ -1,0 +1,107 @@
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/Gotham-Black.otf');
+}
+
+/* 
+@font-face {
+	font-family: 'gotham';
+	src: url('fonts/lovely_font_bold.eot'); 
+	src: 
+		local('Lovely Font Bold'),
+		local('Lovely-Font-Bold'),
+		url('fonts/lovely_font_bold.otf') 
+		format('opentype');
+	font-weight: bold;
+} */
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#main-content {
+    width: 100vw;
+    height: 100vh;
+    background-color: #221F20;
+    color: #D5F378;
+    font-family: gotham;
+    display: flex;
+}
+
+#left-pane, #right-pane {
+    width: 50vw;
+    height: 100vh;
+}
+
+#left-username, #right-username {
+    font-family: gotham;
+    display: inline-block;
+    padding: 1vh 2vh 1vh 2vh;
+    font-size: 4vh;
+    margin-left: 25vw;
+    margin-top: 1vh;
+    transform: translate(-50%);
+}
+
+/* left pane */
+
+#left-pane {
+    background-color: #F3E657;
+}
+
+#left-username {
+    color: white;
+    background-color: #EC533E;
+}
+
+/* right pane */
+
+#right-pane {
+    background-color: #619BEF;
+}
+
+#right-username {
+    color: #221F20;
+    background-color: #CEEDB6;
+}
+
+/* compat meter */
+
+#compat-meter {
+    width: 20vh;
+    height: 90vh;
+    position: absolute;
+    top: 5vh;
+    right: calc(50vw - 10vh);
+    background-color: #E67AA0;
+    box-shadow: 0 0 0 1vh #221F20;
+}
+
+#progress-bar {
+    width: 100%;
+    background-color: #221F20;
+    position: relative;
+}
+
+#progress-bar div {
+    width: 14vh;
+    /* text-align: center; */
+    background: #4C3850;
+    position: absolute;
+    bottom: -2vh;
+    font-size: 4vh;
+    left: 3vh;
+    text-align: center;
+    /* color: white; */
+}
+
+/* credits */
+
+#credits {
+    position: absolute;
+    bottom: .5vh;
+
+}
