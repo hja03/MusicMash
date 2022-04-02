@@ -12,9 +12,13 @@ We built the back-end in python using and we built the front end in CSS, HTML an
 ## How we did the data analysis
 
 ### The data
-We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the attributes of each of the songs. We then go through all of the songs in the top 50 and compare each of the songs in the top 50 in order to get a score from 0-1 which states how similar the songs are (compatibility). We then store the maximum compatibility score. 
+We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the genre of each of the songs.
 
 ### How we calculate the compatibility score
+Explanation in graphical form. We plot all of the songs in a 5D graph with the axis being danceability, energy, acouticness, valence and tempo. We then go through all of the songs in one of the users top 50 and find the minimum distance on the 5D graph to one of the other users top 50 songs. We calculate this Euclidean distance using vectors and pythagoras theorem. This will give a number from 0-1. We then times this number by 100 and this is then displayed as the number as the compatibility number on the website.
+
+I have drawn a 2D representation of the graph below
+![](https://github.com/hja03/TopHackersAndShaggers/blob/main/2d%20representation.PNG)
 
 ## Challenges we ran into
 
@@ -23,3 +27,6 @@ We get the most listened to songs from both of the users. Each of these songs ha
 ## What we learned
 
 ## What's next for Untitled
+
+
+## How we used to do the compatibility score

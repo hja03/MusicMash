@@ -1,6 +1,7 @@
 import Spotify
 from Track import Track
 import math
+import requests
 
 # idk if this works yet
 def comparisonScore(user1, user2):
@@ -148,3 +149,60 @@ def compareScoreV3(user1, user2):
 		total_compats.append(max(compats))
 
 	return (sum(total_compats) / len(total_compats)) * 100
+
+def sortTracksByCompat(tracks_json_in, user1, user2):
+		tracks_json = tracks_json_in['tracks']
+
+		ids = []
+		for track in tracks_json:
+			ids.append(track['id'])
+		ids_str = ",".join(ids)
+		r = requests.get('http://api.spotify.com/v1/audio-features', headers=user1.headers,
+						 params={'ids': ids_str})
+
+		track_objs = []
+		for track in r.json()['audio_features']:
+			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
+						  track['tempo'], track['id'])
+			track_objs.append(track_obj)
+
+
+		tracks1 = user1.track_objs
+		tracks2 = user2.track_objs
+
+		vector1 = [0,0,0,0,0]
+		for track in tracks1:
+			vector1[0] += track.acousticness
+			vector1[1] += track.danceability
+			vector1[2] += track.energy
+			vector1[3] += track.tempo
+			vector1[4] += track.valence
+		vector1 = [x / 50 for x in vector1]
+
+		vector2 = [0,0,0,0,0]
+		for track in tracks2:
+			vector2[0] += track.acousticness
+			vector2[1] += track.danceability
+			vector2[2] += track.energy
+			vector2[3] += track.tempo
+			vector2[4] += track.valence
+		vector2 = [x / 50 for x in vector2]
+
+		u1vector = Track(vector1[0], vector1[1],vector1[2],vector1[3],vector1[4], -1)
+		u2vector = Track(vector2[0], vector2[1],vector2[2],vector2[3],vector2[4], -1)
+
+		compat_track_dict = {}
+		for track in track_objs:
+			track_compat = track.compareSong(u1vector) * track.compareSong(u2vector)
+			compat_track_dict[track] = track_compat
+
+		sorted_list = [k for k, v in sorted(compat_track_dict.items(), key=lambda item: item[1])]
+
+		actual_json_data = []
+		for track in sorted_list:
+			for json_track in tracks_json:
+				if track.trackID == json_track['id']:
+					actual_json_data.append(json_track)
+
+		print("HEREISMYSORTED JSON DATA \n\n\n\n\n\n")
+		print(actual_json_data)

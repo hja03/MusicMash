@@ -49,13 +49,15 @@ def play():
 	user2 = Spotify.Client(session['access_token_2'])
 
 	user1.get_top_x_artists(50)
+	user1.get_top_genres()
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
-	ids = []
-	# tracks = user1.top_50_tracks()
+	Compare.sortTracksByCompat(tracks, user1, user2)
+	for track in tracks['tracks']:
+		print(track['name'])
 	Compare.comparisonScore(user1, user2)
 	print(" Compatability: " + str(Compare.compareScoreV3(user1, user2)))
 	session.clear()
-	session.clear()
+	# session.clear()
 	return str(Compare.comparisonStats(user1, user2))
 
 @app.route('/result')

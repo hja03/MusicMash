@@ -4,7 +4,6 @@ from Track import Track
 import requests
 from Artist import Artist
 
-
 class Client:
 	def __init__(self, access_token):
 		self.access_token = access_token
@@ -29,8 +28,9 @@ class Client:
 		self.tracks_str = ",".join(self.tracks)
 		r = requests.get('http://api.spotify.com/v1/audio-features', headers=self.headers,
 						 params={'ids': self.tracks_str})
+		i = 0
 		self.track_objs = []
-		for genre, track, track_name in zip(self.genres, r.json()['audio_features'], self.track_names):
+		for track, track_name in zip(r.json()['audio_features'], self.track_names):
 			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
 							  track['tempo'], track['id'], name=track_name)
 			self.track_objs.append(track_obj)
@@ -74,4 +74,3 @@ class Client:
 		params['limit'] = 50
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
 		return r.json()
-
