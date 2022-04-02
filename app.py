@@ -66,6 +66,8 @@ def result():
 	data['compatibility'] = round(Compare.compareScoreV3(user1, user2))
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	ids = []
+
+	user1.create_playlist("name", "descript")
 	# tracks = user1.top_50_tracks()
 	# session.clear()
 	return render_template('home.html', data=data)

@@ -11,6 +11,7 @@ class Client:
 		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
 		self.name = r.json()['display_name']
 		self.img = r.json()['images']
+		self.id = r.json()['id']
 		if self.img:
 			self.img = self.img[0]['url']
 		else:
@@ -74,11 +75,7 @@ class Client:
 		return r.json()
 
 
-	def get_current_user_profile(self):
-		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
-		return r.json()
-
 	def create_playlist(self, name, description):
 		params = {'name':name, 'description':description}
-		user_id = get_current_user_profile()['id']
+		user_id = self.id
 		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, params=params)
