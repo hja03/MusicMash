@@ -4,6 +4,8 @@ import hashlib
 import requests
 import base64
 
+import Spotify
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secretkey"  # random secret key refreshes session variables on run
 app.config['SESSION_TYPE']: 'filesystem'
@@ -21,7 +23,8 @@ def hello_world():  # put application's code here
 @app.route('/spotify-auth')
 def spotify_authorise():
 	response = redirect('https://accounts.spotify.com/authorize?client_id=af9db20ad8e342afbb98888472777ded'
-						'&response_type=code&redirect_uri=http://127.0.0.1:5000/spotify-callback')
+						'&response_type=code&redirect_uri=http://127.0.0.1:5000/spotify-callback&scope=user-read-private '
+						'user-follow-read user-library-read playlist-read-private user-top-read user-read-recently-played')
 	return response
 
 
@@ -32,10 +35,15 @@ def spotify_callback():
 					  params={'grant_type': 'authorization_code', 'code': request.args.get('code'), 'redirect_uri': 'http://127.0.0.1:5000/spotify-callback'},
 					  url='https://accounts.spotify.com/api/token')
 	session['access_token'] = r.json()['access_token']
-
+	spotify1 = Spotify.Client(session['access_token'])
+	# spotify1.top_50_tracks()
 	return session.get('access_token')
 
-
+@app.route('/use-data')
+def play():
+	s1 = Spotify.Client(session['access_token'])
+	s1.top_50_tracks()
+	return "a"
 
 if __name__ == '__main__':
 	app.run()
