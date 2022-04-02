@@ -15,31 +15,23 @@
 
             <!-- user info -->
             <div id="left-user-wrapper" class="user-wrapper">
-                <img class="profile-img" src="https://www.naso.org/wp-content/uploads/2016/12/person-pointing.jpg">
-                <div class="username">Jem Clift</div>
+                <img class="profile-img" src="{{ data['usr_img'][0] }}">
+                <div class="username">{{ data['name'][0] }}</div>
             </div>
 
             <!-- main stats -->
             <div class="main-stats">
                 <div class="top-songs"># Top Songs</div>
 
+                {% for num, track in data['top_tracks'][0] %}
                 <div class="top-song">
-                    <div class="number">1</div>
-                    <div class="song-name">GOOD 4 U - OLIVIA RODRIGO</div>
+                    <div class="number">{{ num }}</div>
+                    <div class="song-name">{{ track.name }}</div>
                 </div>
-
-                <div class="top-song">
-                    <div class="number">2</div>
-                    <div class="song-name">SAVE YOUR TEARS - WEEKND</div>
-                </div>
-
-                <div class="top-song">
-                    <div class="number">3</div>
-                    <div class="song-name">HEAT WAVES - GLASS ANIMALS</div>
-                </div>
+                    {% endfor %}
 
                 <div class="top-genre"># Top Genre</div>
-                <div class="genre">Dancehall</div>
+                <div class="genre">{{ data['top_genre'][1] }}</div>
 
             </div>
         </div>
@@ -48,7 +40,7 @@
         <div id="middle-pane">
 
             <!-- compatability score -->
-            <div id="compatabiltiy">95<span>%</span></div>
+            <div id="compatabiltiy">{{ data['compatibility'] }}<span>%</span></div>
             <div id="compat-label">compatable</div>
 
             <!-- playlist preview -->
@@ -73,30 +65,21 @@
             <div id="right-user-wrapper" class="user-wrapper">
                 
                 <!-- user info -->
-                <img class="profile-img" src="https://www.naso.org/wp-content/uploads/2016/12/person-pointing.jpg">
-                <div class="username">Harvey Ayling</div>            </div>            
+                <img class="profile-img" src="{{ data['usr_img'][1] }}">
+                <div class="username">{{ data['name'][1] }}</div>            </div>
             
                 <!-- main stats -->
                 <div class="main-stats">
                 <div class="top-songs"># Top Songs</div>
-
+                {% for num, track in data['top_tracks'][1] %}
                 <div class="top-song">
-                    <div class="number">1</div>
-                    <div class="song-name">BODY - TION WAYNE & RUSS MILLIONS</div>
+                    <div class="number">{{ num }}</div>
+                    <div class="song-name">{{ track.name }}</div>
                 </div>
-
-                <div class="top-song">
-                    <div class="number">2</div>
-                    <div class="song-name">WITHOUT YOU - KID LAROI</div>
-                </div>
-
-                <div class="top-song">
-                    <div class="number">3</div>
-                    <div class="song-name">SOMEONE YOU LOVED - LEWIS CAPALDI</div>
-                </div>
+                    {% endfor %}
 
                 <div class="top-genre"># Top Genre</div>
-                <div class="genre">DNB</div>
+                <div class="genre">{{ data['top_genre'][1] }}</div>
 
             </div>
         </div>

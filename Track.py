@@ -1,9 +1,10 @@
 from tempfile import TemporaryDirectory
 import math
+import requests
 
 
 class Track:
-	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None):
+	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None, name=None):
 		self.danceability = danceability
 		self.energy = energy
 		self.acousticness = acousticness
@@ -12,6 +13,7 @@ class Track:
 		# tempo starts in BPM / by 200 to standardise to roughly 0 - 1
 		self.tempo = tempo / 200
 		self.genre = genre
+		self.name = name
 
 	def compareSong(self, otherPersonsSong):
 		compatibility = 0  # 0-100

@@ -41,7 +41,7 @@ def spotify_callback():
 		return redirect('/?login=2')
 	else:
 		session['access_token_2'] = r.json()['access_token']
-	return redirect('/use-data')
+	return redirect('/result')
 
 @app.route('/use-data')
 def play():
@@ -49,15 +49,34 @@ def play():
 	user2 = Spotify.Client(session['access_token_2'])
 
 	user1.get_top_x_artists(50)
-	user1.get_top_genres()
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
-	for track in tracks['tracks']:
-		print(track['name'])
+	ids = []
+	# tracks = user1.top_50_tracks()
 	Compare.comparisonScore(user1, user2)
 	print(" Compatability: " + str(Compare.compareScoreV3(user1, user2)))
 	session.clear()
-	# session.clear()
+	session.clear()
 	return str(Compare.comparisonStats(user1, user2))
+
+@app.route('/result')
+def result():
+	data = {}
+	user1 = Spotify.Client(session['access_token_1'])
+	user2 = Spotify.Client(session['access_token_2'])
+	data['name'] = [user1.name, user2.name]
+	data['top3'] = [user1.top_50_tracks(3), user2.top_50_tracks(3)]
+	data['top_genre'] = [user1.get_top_genres()[0], user2.get_top_genres()[0]]
+	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
+	data['usr_img'] = [user1.img, user2.img]
+	data['compatibility'] = round(Compare.compareScoreV3(user1, user2))
+	user1.get_top_x_artists(50)
+	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
+	ids = []
+	# tracks = user1.top_50_tracks()
+	Compare.comparisonScore(user1, user2)
+	print(" -- " + str(Compare.compareScoreV2(user1, user2)))
+	# session.clear()
+	return render_template('home.html', data=data)
 
 if __name__ == '__main__':
 	app.run()
