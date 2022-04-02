@@ -53,7 +53,7 @@ def play():
 	Compare.comparisonScore(user1, user2)
 	# session.clear()
 	session.clear()
-	return str(Compare.comparisonScore(user1, user2))
+	return str(Compare.comparisonStats(user1, user2))
 
 if __name__ == '__main__':
 	app.run()
