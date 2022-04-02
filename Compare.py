@@ -10,7 +10,7 @@ def comparisonScore(user1, user2):
 
 	vector1 = [0,0,0,0,0]
 	for track in tracks1:
-		vector1[0] += track.acouticness
+		vector1[0] += track.acousticness
 		vector1[1] += track.danceability
 		vector1[2] += track.energy
 		vector1[3] += track.tempo
@@ -19,7 +19,7 @@ def comparisonScore(user1, user2):
 
 	vector2 = [0,0,0,0,0]
 	for track in tracks2:
-		vector2[0] += track.acouticness
+		vector2[0] += track.acousticness
 		vector2[1] += track.danceability
 		vector2[2] += track.energy
 		vector2[3] += track.tempo
@@ -44,7 +44,7 @@ def comparisonStats(user1, user2):
 
 	vector1 = [[],[],[],[],[]]
 	for track in tracks1:
-		vector1[0].append(track.acouticness)
+		vector1[0].append(track.acousticness)
 		vector1[1].append(track.danceability)
 		vector1[2].append(track.energy)
 		vector1[3].append(track.tempo)
@@ -52,7 +52,7 @@ def comparisonStats(user1, user2):
 
 	vector2 = [[],[],[],[],[]]
 	for track in tracks1:
-		vector2[0].append(track.acouticness)
+		vector2[0].append(track.acousticness)
 		vector2[1].append(track.danceability)
 		vector2[2].append(track.energy)
 		vector2[3].append(track.tempo)
@@ -110,3 +110,20 @@ def comparisonStats(user1, user2):
 	output["seed_tracks"] = ",".join(songs)
 
 	return output
+
+
+def compareScoreV2(user1, user2):
+	tracks1 = user1.top_50_tracks()
+	tracks2 = user2.top_50_tracks()
+
+	matching = []
+	for t1 in tracks1:
+		for t2 in tracks2:
+			if t1.genre == t2.genre:
+				matching.append(t1.compareSong(t2))
+
+	proportion_matching = len(matching) / (50**2)
+	avg_distance = sum(matching)  / (50**2)
+
+	print("Proportion, avg dist: ", proportion_matching, avg_distance)
+	return proportion_matching * avg_distance

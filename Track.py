@@ -6,7 +6,7 @@ class Track:
 	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None):
 		self.danceability = danceability
 		self.energy = energy
-		self.acouticness = acousticness
+		self.acousticness = acousticness
 		self.valence = valence
 		self.trackID = trackID
 		# tempo starts in BPM / by 200 to standardise to roughly 0 - 1
@@ -27,10 +27,10 @@ class Track:
 		compatibility = 1 - compatibility
 
 		# skews the number to be more representative of compatability
-		compatibility = 1 / (1 + math.exp(-10 * (compatibility - 0.3)))
+		#compatibility = 1 / (1 + math.exp(-10 * (compatibility - 0.3)))
 
 		# make into percentage
-		compatibility *= 100
+		#compatibility *= 100
 
 		return compatibility
 

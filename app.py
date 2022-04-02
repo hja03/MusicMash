@@ -53,7 +53,8 @@ def play():
 	for track in tracks['tracks']:
 		print(track['name'])
 	Compare.comparisonScore(user1, user2)
-	# session.clear()
+	print(" -- " + str(Compare.compareScoreV2(user1, user2)))
+	session.clear()
 	# session.clear()
 	return str(Compare.comparisonStats(user1, user2))
 

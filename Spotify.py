@@ -31,6 +31,7 @@ class Client:
 		r = requests.get('https://api.spotify.com/v1/me/top/artists', headers=self.headers,
 						 params={'limit': limit})
 		self.artists = []
+		print(r.json())
 		for artist in r.json()['items']:
 			artist_obj = Artist(artist['id'], artist['name'], artist['genres'], artist['popularity'])
 			self.artists.append(artist_obj)
