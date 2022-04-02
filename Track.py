@@ -13,4 +13,19 @@ class Track:
         compatibility = 0 #0-100
         return compatibility
 
+class top50Tracks:
+    def __init__(self, listOfTop50Tracks):
+        self.track = listOfTop50Tracks
 
+    def compareAllTracks(self, otherUsersTop50):
+        for track in self.tracks:
+            track.compareSong()
+
+    def compare1trackToAllSongs(self,track1):
+        maxCompat = -1
+        for track in self.tracks:
+            compat = track1.compareSong(track)
+            if compat > maxCompat:
+                maxCompat = compat
+
+        return maxCompat
