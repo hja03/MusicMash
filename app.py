@@ -34,15 +34,15 @@ def spotify_callback():
 							   'Content-Type': 'application/x-www-form-urlencoded'},
 					  params={'grant_type': 'authorization_code', 'code': request.args.get('code'), 'redirect_uri': 'http://127.0.0.1:5000/spotify-callback'},
 					  url='https://accounts.spotify.com/api/token')
-	session['access_token'] = r.json()['access_token']
-	spotify1 = Spotify.Client(session['access_token'])
-	# spotify1.top_50_tracks()
-	return session.get('access_token')
+	if 'access_token' in session.keys():
+		session['access_token'].append(r.json()['access_token'])
+		return redirect('/use-data')
+	return redirect('/?login=2')
 
 @app.route('/use-data')
 def play():
-	s1 = Spotify.Client(session['access_token'])
-	s1.top_50_tracks()
+	user1 = Spotify.Client(session['access_token'][0])
+	user2 = Spotify.Client(session['access_token'][1])
 	return "a"
 
 if __name__ == '__main__':

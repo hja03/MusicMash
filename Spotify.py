@@ -1,6 +1,6 @@
-import Track
+from Track import Track
 import requests
-
+from Artist import Artist
 
 class Client:
 	def __init__(self, access_token):
@@ -27,26 +27,11 @@ class Client:
 			self.track_objs.append(track)
 		return self.track_objs
 
-#Get top 50 songs for a certain user
-def getTop50(userID):
-
-    ### Insert API jazz here ###
-    trackIDs = getTrackIDsOfTop50(userID)
-    tracks50 = getStatsOfAllTracks(trackIDs)
-
-    return tracks50 #This should return a python list containing all of the track objects
-
-def getTrackIDsOfTop50(userID):
-
-    #Oh beautiful Matt do your thing
-
-    return TracksID
-
-def getStatsOfAllTracks(trackIds):
-
-    return TrackObjects #List of track objects
-
-
-# def getTrackAndStats(trackID):
-
-#     return TrackObject
+	def get_top_x_artists(self, limit):
+		r = requests.get('https://api.spotify.com/v1/me/top/artists', headers=self.headers,
+						 params={'limit': limit})
+		self.artists = []
+		for artist in r.json()['items']:
+			artist_obj = Artist(artist['id'], artist['name'], artist['genres'], artist['popularity'])
+			self.artists.append(artist_obj)
+		return self.artists
