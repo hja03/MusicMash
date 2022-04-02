@@ -18,7 +18,7 @@ We get the most listened to songs from both of the users. Each of these songs ha
 Explanation in graphical form. We plot all of the songs in a 5D graph with the axis being danceability, energy, acouticness, valence and tempo. We then go through all of the songs in one of the users top 50 and find the minimum distance on the 5D graph to one of the other users top 50 songs. We calculate this Euclidean distance using vectors and pythagoras theorem. This will give a number from 0-1. We then times this number by 100 and this is then displayed as the number as the compatibility number on the website.
 
 I have drawn a 2D representation of the graph below
-!(2d representation.PNG)
+![](https://github.com/hja03/TopHackersAndShaggers/blob/main/2d%20representation.PNG)
 
 ## Challenges we ran into
 
