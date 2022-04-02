@@ -10,21 +10,24 @@ It's a revolutionary web application. When you first open the application, you a
 We built the back-end in Python using Flask, and we built the front end in HTML, CSS, and JavaScript. 
 
 ## How we did the data analysis
-
 ### The data
 We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the Spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the genre of each of the songs.
 
 ### How we calculate the compatibility score
 Explanation in graphical form. We plot all the songs in 5D space with the axis being danceability, energy, acouticness, valence and tempo. We then go through all the songs in one of the user's top 50 and find the minimum distance on the 5D graph to one of the other user's top 50 songs. We also calculate this Euclidean distance using vectors and Pythagoras' theorem. This will give a number from 0-1. We then times this number by 100 and this is then displayed as the number as the compatibility number on the website.
 
-I have drawn a 2D representation of the graph below
+I have drawn a 2D representation of what the euclidian distance is:
 ![](https://github.com/hja03/TopHackersAndShaggers/blob/main/2d%20representation.PNG)
 
 ## Challenges we ran into
+Our app is currently in development so spotify makes us manually authorize users and we would need clearance from spotify to change this.
+Coming up with a name.
 
 ## Accomplishments that we're proud of
+It works!!!!!
 
 ## What we learned
+We learnt how the spotify API worked, got used to how git hub works and using it within the IDE and How to effictevly work as a team (delegating tasks and creating a fun and productive work environment).
 
 ## What's next for Untitled
 
