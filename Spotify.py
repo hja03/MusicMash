@@ -11,10 +11,10 @@ class Client:
 		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
 		self.name = r.json()['display_name']
 		self.img = r.json()['images']
-		#if self.img:
-		#	self.img = self.img['url']
-		#else:
-		self.img = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
+		if self.img:
+			self.img = self.img[0]['url']
+		else:
+			self.img = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
 		print(self.img)
 
 	def top_50_tracks(self, limit=50):
@@ -46,8 +46,8 @@ class Client:
 			self.artists.append(artist_obj)
 		return self.artists
 
-	def get_top_genres(self):
-		self.get_top_x_artists(50)
+	def get_top_genres(self, num=50):
+		self.get_top_x_artists(num)
 		genres = {}
 		if self.artists:
 			for artist in self.artists:
