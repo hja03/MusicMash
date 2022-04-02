@@ -2,11 +2,12 @@ from tempfile import TemporaryDirectory
 import math
 
 class Track:
-    def __init__(self, danceability, energy, acousticness, valence, tempo):
+    def __init__(self, danceability, energy, acousticness, valence, tempo, trackID):
         self.danceability = danceability
         self.energy = energy
         self.acouticness = acousticness
         self.valence = valence
+        self.trackID = trackID
         # tempo starts in BPM / by 200 to standardise to roughly 0 - 1
         self.tempo = tempo / 200
 
