@@ -18,7 +18,7 @@ class Track:
 
 		# finds the distance between the two tracks so the closer to 0 the more compatable
 		compatibility = math.sqrt((self.danceability - otherPersonsSong.danceability) ** 2
-								  + (self.energy - otherPersonsSong.danceability) ** 2
+								  + (self.energy - otherPersonsSong.energy) ** 2
 								  + (self.acousticness - otherPersonsSong.acousticness) ** 2
 								  + (self.valence - otherPersonsSong.valence) ** 2
 								  + (self.tempo - otherPersonsSong.tempo) ** 2)
