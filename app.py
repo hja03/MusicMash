@@ -37,6 +37,8 @@ def spotify_callback():
 	if 'access_token' in session.keys():
 		session['access_token'].append(r.json()['access_token'])
 		return redirect('/use-data')
+	else:
+		session['access_token'] = [r.json()['access_token']]
 	return redirect('/?login=2')
 
 @app.route('/use-data')
