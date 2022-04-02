@@ -1,5 +1,10 @@
 /* main page */
 
+/* 
+- attribute scores
+- generate playlist button
+*/
+
 :root {
     --primary-color: black;
     --secondary-color: white;
@@ -36,6 +41,8 @@ body {
     width: 7vh;
     height: 7vh;
     border-radius: 100%;
+    box-sizing: border-box;
+    border: .5vh solid var(--primary-color);
 }
 
 .username {
@@ -43,6 +50,7 @@ body {
     line-height: 7vh;
     font-family: gotham;
     margin-left: 2vh;
+    color: var(--primary-color);
 }
 
 #left-pane {
@@ -66,6 +74,7 @@ body {
     text-align: center;
     margin: 1vh;
     box-sizing: border-box;
+    position: relative;
 }
 
 #compatabiltiy span {
@@ -76,6 +85,10 @@ body {
     font-size: 4vh;
     font-family: gotham;
     text-align: center;
+    color: var(--secondary-color);
+    position: absolute;
+    top: -12vh;
+    left: 1.5vh
 }
 
 .top-songs {
@@ -114,7 +127,7 @@ body {
 
 .genre {
     margin: 1vh;
-    border: .5vh solid var(--primary-color);
+    border: .75vh solid var(--primary-color);
     box-sizing: border-box;
     font-family: gotham;
     color: var(--primary-color);
@@ -122,10 +135,19 @@ body {
     text-align: center;
     text-transform: uppercase;
     padding: 2vh 1vh 2vh 1vh;
-
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--primary-color),
+        var(--primary-color) 1vh,
+        var(--secondary-color) 1vh,
+        var(--secondary-color) 2vh
+    );
 }
 
-
+.genre span {
+    background-color: var(--secondary-color);
+    padding: 0 1vh 0 1vh;
+}
 
 .top-song .number {
     background-color: var(--primary-color);
@@ -144,6 +166,20 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+#generate-button {
+    font-size: 4vh;
+    font-family: gotham;
+    text-align: center;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border: 1vh solid var(--primary-color);
+    margin: 1vh;
+    padding: 1vh;
+    user-select: none;
+    cursor: pointer;
 }
 
 /* credits */
@@ -152,6 +188,54 @@ body {
     position: absolute;
     bottom: .5vh;
 
+}
+
+.preview-pl {
+    font-family: gotham;
+    color: var(--secondary-color);
+    font-size: 4vh;
+    background-color: var(--primary-color);
+    padding: 1vh;
+    text-align: center;
+    display: inline-block;
+    margin-left: calc(100vw / 6);
+    transform: translate(-50%);
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+}
+
+.preview-row {
+    margin: 1vh;
+    display: flex;
+}
+
+.preview-row img {
+    width: calc(100% / 3);
+    border: 1vh solid var(--primary-color);;
+}
+
+.preview-row img:nth-child(2) {
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+@keyframes radiate {
+    from {
+        box-shadow: 0 0 0 0 black;
+    }
+    to {
+        box-shadow: 0 0 0 5vh rgba(0,0,0,0);
+    }
+}
+
+#credits {
+    font-family: gotham;
+    font-size: 2vh;
+    position: absolute;
+    bottom: 1vh;
+    left: 50vw;
+    transform: translate(-50%);
+    color: var(--primary-color);
 }
 
 /* login page */
@@ -182,37 +266,6 @@ body {
     width: 100%;
 }
 
-.preview-row {
-    background-color: red;
-    margin: 1vh;
-    display: flex;
-}
-
-.preview-row img {
-    width: 10.25vw;
-    height: 10.25vw;
-    border 1vh solid 
-}
-
-.preview-row img:nth-child(2) {
-    margin-left: 1vh;
-    margin-right: 1vh;
-}
-
-@keyframes radiate {
-    from {
-        box-shadow: 0 0 0 0 black;
-    }
-    to {
-        box-shadow: 0 0 0 5vh rgba(0,0,0,0);
-    }
-}
-
-#credits {
-    font-family: gotham;
-    font-size: 2vh;
-    position: absolute;
-    bottom: 1vh;
-    left: 50vw;
-    transform: translate(-50%);
+#login-main {
+    background-color: #221F20;
 }
