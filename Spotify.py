@@ -14,10 +14,8 @@ class Client:
 		for i in r.json()["items"]:
 			self.tracks.append(i['id'])
 		self.tracks_str = ",".join(self.tracks)
-		print(self.tracks_str)
 		r = requests.get('http://api.spotify.com/v1/audio-features', headers=self.headers,
 						 params={'ids': self.tracks_str})
-		print(r.json())
 		i = 0
 		self.track_objs = []
 		for track in r.json()['audio_features']:
