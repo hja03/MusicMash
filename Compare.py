@@ -83,7 +83,7 @@ def comparisonStats(user1, user2):
 	songs = []
 	genres = []
 
-	#songs.append(tracks1[0].trackID)
+	songs.append(tracks1[0].trackID)
 	#songs.append(tracks1[1].trackID)
 	#songs.append(tracks2[0].trackID)
 	#songs.append(tracks2[1].trackID)
@@ -95,15 +95,15 @@ def comparisonStats(user1, user2):
 	u2genres = user2.get_top_genres()
 
 	genres.append(u1genres[0])
-	genres.append(u1genres[1])
+	#genres.append(u1genres[1])
 	genres.append(u2genres[0])
-	genres.append(u2genres[1])
+	#genres.append(u2genres[1])
 
 
 	artists.append(u1artists[0].id)
-	artists.append(u1artists[1].id)
+	#artists.append(u1artists[1].id)
 	artists.append(u2artists[0].id)
-	artists.append(u2artists[1].id)
+	#artists.append(u2artists[1].id)
 
 	output["seed_artists"] = ",".join(artists)
 	output["seed_genres"] = ",".join(artists)
