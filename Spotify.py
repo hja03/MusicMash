@@ -27,10 +27,6 @@ class Client:
 			self.track_objs.append(track)
 		return self.track_objs
 
-		# self.tracks = self.tracks[:-1]
-		# print(self.tracks)
-		return self.tracks
-
 #Get top 50 songs for a certain user
 def getTop50(userID):
 
