@@ -47,13 +47,14 @@ def spotify_callback():
 def play():
 	user1 = Spotify.Client(session['access_token_1'])
 	user2 = Spotify.Client(session['access_token_2'])
+
 	user1.get_top_x_artists(50)
 	user1.get_top_genres()
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	for track in tracks['tracks']:
 		print(track['name'])
 	Compare.comparisonScore(user1, user2)
-	print(" -- " + str(Compare.compareScoreV2(user1, user2)))
+	print(" Compatability: " + str(Compare.compareScoreV3(user1, user2)))
 	session.clear()
 	# session.clear()
 	return str(Compare.comparisonStats(user1, user2))
