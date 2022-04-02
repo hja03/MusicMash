@@ -1,6 +1,8 @@
-import Track
-import requests
+import itertools
 
+from Track import Track
+import requests
+from Artist import Artist
 
 class Client:
 	def __init__(self, access_token):
@@ -14,39 +16,51 @@ class Client:
 		for i in r.json()["items"]:
 			self.tracks.append(i['id'])
 		self.tracks_str = ",".join(self.tracks)
-		print(self.tracks_str)
 		r = requests.get('http://api.spotify.com/v1/audio-features', headers=self.headers,
 						 params={'ids': self.tracks_str})
-		print(r.json())
 		i = 0
 		self.track_objs = []
 		for track in r.json()['audio_features']:
-			track = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
+			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
 						  track['tempo'], track['id'])
 			i += 1
-			self.track_objs.append(track)
+			self.track_objs.append(track_obj)
 		return self.track_objs
 
-#Get top 50 songs for a certain user
-def getTop50(userID):
+	def get_top_x_artists(self, limit):
+		r = requests.get('https://api.spotify.com/v1/me/top/artists', headers=self.headers,
+						 params={'limit': limit})
+		self.artists = []
+		print(r.json())
+		for artist in r.json()['items']:
+			artist_obj = Artist(artist['id'], artist['name'], artist['genres'], artist['popularity'])
+			self.artists.append(artist_obj)
+		return self.artists
 
-    ### Insert API jazz here ###
-    trackIDs = getTrackIDsOfTop50(userID)
-    tracks50 = getStatsOfAllTracks(trackIDs)
+	def get_top_genres(self):
+		genres = {}
+		if self.artists:
+			for artist in self.artists:
+				for genre in artist.genre:
+					if genre in genres.keys():
+						genres[genre] += 1
+					else:
+						genres[genre] = 1
+		sorted_genres_vals = sorted(genres.values())  # Sort the values
+		sorted_genres = {}
+		for i in sorted_genres_vals[::-1]:
+			for k in genres.keys():
+				if genres[k] == i:
+					sorted_genres[k] = genres[k]
+					break
+		genres = []
 
-    return tracks50 #This should return a python list containing all of the track objects
+		for genre in sorted_genres.keys():
+			genres.append(genre)
+		return genres
 
-def getTrackIDsOfTop50(userID):
-
-    #Oh beautiful Matt do your thing
-
-    return TracksID
-
-def getStatsOfAllTracks(trackIds):
-
-    return TrackObjects #List of track objects
-
-
-# def getTrackAndStats(trackID):
-
-#     return TrackObject
+	def get_recommendations(self, params):
+		params = params
+		params['limit'] = 50
+		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
+		return r.json()

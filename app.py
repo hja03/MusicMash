@@ -4,6 +4,7 @@ import hashlib
 import requests
 import base64
 
+import Compare
 import Spotify
 
 app = Flask(__name__)
@@ -24,7 +25,8 @@ def hello_world():  # put application's code here
 def spotify_authorise():
 	response = redirect('https://accounts.spotify.com/authorize?client_id=af9db20ad8e342afbb98888472777ded'
 						'&response_type=code&redirect_uri=http://127.0.0.1:5000/spotify-callback&scope=user-read-private '
-						'user-follow-read user-library-read playlist-read-private user-top-read user-read-recently-played')
+						'user-follow-read user-library-read playlist-read-private user-top-read user-read-recently-played'
+						'&show_dialog=true')
 	return response
 
 
@@ -34,16 +36,27 @@ def spotify_callback():
 							   'Content-Type': 'application/x-www-form-urlencoded'},
 					  params={'grant_type': 'authorization_code', 'code': request.args.get('code'), 'redirect_uri': 'http://127.0.0.1:5000/spotify-callback'},
 					  url='https://accounts.spotify.com/api/token')
-	session['access_token'] = r.json()['access_token']
-	spotify1 = Spotify.Client(session['access_token'])
-	# spotify1.top_50_tracks()
-	return session.get('access_token')
+	if 'access_token_1' not in session.keys():
+		session['access_token_1'] = r.json()['access_token']
+		return redirect('/?login=2')
+	else:
+		session['access_token_2'] = r.json()['access_token']
+	return redirect('/use-data')
 
 @app.route('/use-data')
 def play():
-	s1 = Spotify.Client(session['access_token'])
-	s1.top_50_tracks()
-	return "a"
+	user1 = Spotify.Client(session['access_token_1'])
+	user2 = Spotify.Client(session['access_token_2'])
+	user1.get_top_x_artists(50)
+	user1.get_top_genres()
+	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
+	for track in tracks['tracks']:
+		print(track['name'])
+	Compare.comparisonScore(user1, user2)
+	print(" -- " + str(Compare.compareScoreV2(user1, user2)))
+	session.clear()
+	# session.clear()
+	return str(Compare.comparisonStats(user1, user2))
 
 if __name__ == '__main__':
 	app.run()
