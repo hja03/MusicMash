@@ -14,6 +14,8 @@ We built the back-end in python using and we built the front end in CSS, HTML an
 ### The data
 We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the attributes of each of the songs. We then go through all of the songs in the top 50 and compare each of the songs in the top 50 in order to get a score from 0-1 which states how similar the songs are (compatibility). We then store the maximum compatibility score. 
 
+### How we calculate the compatibility score
+
 ## Challenges we ran into
 
 ## Accomplishments that we're proud of
