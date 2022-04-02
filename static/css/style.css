@@ -1,3 +1,5 @@
+/* main page */
+
 @font-face {
 	font-family: 'gotham';
 	src: url('../assets/Gotham-Black.otf');
@@ -15,17 +17,15 @@
 	font-weight: bold;
 } */
 
-
-
 body {
     margin: 0;
     padding: 0;
+    background-color: #221F20;
 }
 
 #main-content {
     width: 100vw;
     height: 100vh;
-    background-color: #221F20;
     color: #D5F378;
     font-family: gotham;
     display: flex;
@@ -104,4 +104,41 @@ body {
     position: absolute;
     bottom: .5vh;
 
+}
+
+/* login page */
+
+#login-title {
+    font-family: gotham;
+    font-size: 5vh;
+    color: #D5F478;
+    width: 100vw;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+#img-wrapper {
+    margin-left: 50vw;
+    transform: translate(-50%);
+    width: 40vh;
+    height: 7vh;
+    margin-top: 20vh;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 7vh;
+    animation: 1.5s ease 1s infinite radiate;
+    user-select: none;
+}
+
+#login-img {
+    width: 100%;
+}
+
+@keyframes radiate {
+    from {
+        box-shadow: 0 0 0 0 black;
+    }
+    to {
+        box-shadow: 0 0 0 5vh rgba(0,0,0,0);
+    }
 }
