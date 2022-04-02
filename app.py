@@ -77,7 +77,7 @@ def result():
 	# tracks = user1.top_50_tracks()
 	Compare.comparisonScore(user1, user2)
 	print(" -- " + str(Compare.compareScoreV2(user1, user2)))
-	# session.clear()
+	session.clear()
 	return render_template('home.html', data=data)
 
 if __name__ == '__main__':
