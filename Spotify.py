@@ -1,4 +1,4 @@
-import Track
+from Track import Track
 import requests
 
 
@@ -21,10 +21,10 @@ class Client:
 		i = 0
 		self.track_objs = []
 		for track in r.json()['audio_features']:
-			track = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
+			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
 						  track['tempo'], track['id'])
 			i += 1
-			self.track_objs.append(track)
+			self.track_objs.append(track_obj)
 		return self.track_objs
 
 #Get top 50 songs for a certain user
