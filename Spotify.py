@@ -33,3 +33,24 @@ class Client:
 			artist_obj = Artist(artist['id'], artist['name'], artist['genres'], artist['popularity'])
 			self.artists.append(artist_obj)
 		return self.artists
+
+#Get top 50 songs for a certain user
+def getTop50(userID):
+
+    ### Insert API jazz here ###
+    trackIDs = getTrackIDsOfTop50(userID)
+    tracks50 = getStatsOfAllTracks(trackIDs)
+
+    return tracks50 #This should return a python list containing all of the track objects
+
+
+def getStatsOfAllTracks(trackIds):
+
+    return TrackObjects #List of track objects
+
+
+
+
+# def getTrackAndStats(trackID):
+
+#     return TrackObject
