@@ -4,12 +4,12 @@ import Track
 def getTop50(userID):
 
     ### Insert API jazz here ###
-    trackIDs = getTrackIDsOfTop50
+    trackIDs = getTrackIDsOfTop50(userID)
     tracks50 = getStatsOfAllTracks(trackIDs)
 
     return tracks50 #This should return a python list containing all of the track objects
 
-def getTrackIDsOfTop50():
+def getTrackIDsOfTop50(userID):
     
     #Oh beautiful Matt do your thing
 
