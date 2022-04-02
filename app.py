@@ -4,10 +4,11 @@ import hashlib
 import requests
 import base64
 
+import Compare
 import Spotify
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "secretkey"  # random secret key refreshes session variables on run
+app.config['SECRET_KEY'] = "secrtkey"  # random secret key refreshes session variables on run
 app.config['SESSION_TYPE']: 'filesystem'
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
@@ -39,14 +40,17 @@ def spotify_callback():
 		session['access_token_1'] = r.json()['access_token']
 		return redirect('/?login=2')
 	else:
-		session['access_token_2'] = [r.json()['access_token']]
+		session['access_token_2'] = r.json()['access_token']
 	return redirect('/use-data')
 
 @app.route('/use-data')
 def play():
 	user1 = Spotify.Client(session['access_token_1'])
 	user2 = Spotify.Client(session['access_token_2'])
-	session.clear()
+	user1.get_top_x_artists(50)
+	print(user1.get_top_genres())
+	Compare.comparisonScore(user1, user2)
+	# session.clear()
 	return "a"
 
 if __name__ == '__main__':

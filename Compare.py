@@ -4,8 +4,8 @@ import math
 
 # idk if this works yet
 def comparisonScore(user1, user2):
-	client1 = Spotify.Client(user1)
-	client2 = Spotify.Client(user2)
+	client1 = user1
+	client2 = user2
 
 	tracks1 = client1.top_50_tracks()
 	tracks2 = client2.top_50_tracks()

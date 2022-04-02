@@ -1,3 +1,5 @@
+import itertools
+
 from Track import Track
 import requests
 from Artist import Artist
@@ -33,3 +35,25 @@ class Client:
 			artist_obj = Artist(artist['id'], artist['name'], artist['genres'], artist['popularity'])
 			self.artists.append(artist_obj)
 		return self.artists
+
+	def get_top_genres(self):
+		genres = {}
+		if self.artists:
+			for artist in self.artists:
+				for genre in artist.genre:
+					if genre in genres.keys():
+						genres[genre] += 1
+					else:
+						genres[genre] = 1
+		sorted_genres_vals = sorted(genres.values())  # Sort the values
+		sorted_genres = {}
+		for i in sorted_genres_vals[::-1]:
+			for k in genres.keys():
+				if genres[k] == i:
+					sorted_genres[k] = genres[k]
+					break
+		genres = []
+
+		for genre in dict(itertools.islice(sorted_genres.items(), 5)).keys():
+			genres.append(genre)
+		return genres
