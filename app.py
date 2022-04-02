@@ -8,7 +8,7 @@ import Compare
 import Spotify
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "secrtkey"  # random secret key refreshes session variables on run
+app.config['SECRET_KEY'] = "secretkey"  # random secret key refreshes session variables on run
 app.config['SESSION_TYPE']: 'filesystem'
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
@@ -51,7 +51,8 @@ def play():
 	print(user1.get_top_genres())
 	Compare.comparisonScore(user1, user2)
 	# session.clear()
-	return "a"
+	session.clear()
+	return str(Compare.comparisonScore(user1, user2))
 
 if __name__ == '__main__':
 	app.run()

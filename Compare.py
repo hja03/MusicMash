@@ -4,11 +4,9 @@ import math
 
 # idk if this works yet
 def comparisonScore(user1, user2):
-	client1 = user1
-	client2 = user2
 
-	tracks1 = client1.top_50_tracks()
-	tracks2 = client2.top_50_tracks()
+	tracks1 = user1.top_50_tracks()
+	tracks2 = user2.top_50_tracks()
 
 	vector1 = [0,0,0,0,0]
 	for track in tracks1:
@@ -40,3 +38,44 @@ def comparisonScore(user1, user2):
 
 	return compatability
 
+def comparisonStats(user1, user2):
+	tracks1 = user1.top_50_tracks()
+	tracks2 = user2.top_50_tracks()
+
+	vector1 = [[],[],[],[],[]]
+	for track in tracks1:
+		vector1[0].append(track.acouticness)
+		vector1[1].append(track.danceability)
+		vector1[2].append(track.energy)
+		vector1[3].append(track.tempo)
+		vector1[4].append(track.valence)
+
+	vector2 = [[],[],[],[],[]]
+	for track in tracks1:
+		vector2[0].append(track.acouticness)
+		vector2[1].append(track.danceability)
+		vector2[2].append(track.energy)
+		vector2[3].append(track.tempo)
+		vector2[4].append(track.valence)
+
+	stats = ["acousticness", "danceability", "energy", "tempo", "valence"]
+	output = {}
+
+	for index, stat in enumerate(stats):
+		u1_min = min(vector1[index])
+		u1_avg = sum(vector1[index]) / 50
+		u1_max = max(vector1[index])
+
+		u2_min = min(vector2[index])
+		u2_avg = sum(vector2[index]) / 50
+		u2_max = max(vector2[index])
+
+		output["min_" + stat] = min(u1_min, u2_min)
+		output["target_" + stat] = (u1_avg + u2_avg) / 2
+		output["max_" + stat] = max(u1_max, u2_max)
+
+	output["min_tempo"] = output["min_tempo"] * 200
+	output["target_tempo"] = output["target_tempo"] * 200
+	output["max_tempo"] = output["max_tempo"] * 200
+
+	return output
