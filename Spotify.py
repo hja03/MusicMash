@@ -74,3 +74,13 @@ class Client:
 		params['limit'] = 50
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
 		return r.json()
+
+
+	def get_current_user_profile(self):
+		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
+		return r.json()
+
+	def create_playlist(self, name, description):
+		params = {'name':name, 'description':description}
+		user_id = get_current_user_profile()['id']
+		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, params=params)

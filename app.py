@@ -57,6 +57,7 @@ def play():
 	Compare.comparisonScore(user1, user2)
 	print(" Compatability: " + str(Compare.compareScoreV3(user1, user2)))
 	session.clear()
+	user1.create_playlist("test", "test for project")
 	# session.clear()
 	return str(Compare.comparisonStats(user1, user2))
 

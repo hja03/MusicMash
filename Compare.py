@@ -152,6 +152,8 @@ def compareScoreV3(user1, user2):
 	score = (0.3633 * math.exp(1.341 * score)) - 0.3664
 	score *= 100
 
+	score = min(100, score)
+
 	return score
 
 def sortTracksByCompat(tracks_json_in, user1, user2):
