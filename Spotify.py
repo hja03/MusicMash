@@ -59,5 +59,7 @@ class Client:
 		return genres
 
 	def get_recommendations(self, params):
+		params = params
+		params['limit'] = 50
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
-		print(r.json())
+		return r.json()

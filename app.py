@@ -48,11 +48,13 @@ def play():
 	user1 = Spotify.Client(session['access_token_1'])
 	user2 = Spotify.Client(session['access_token_2'])
 	user1.get_top_x_artists(50)
-	print(user1.get_top_genres())
-	Compare.comparisonStats(user1, user2)
+	user1.get_top_genres()
+	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
+	for track in tracks['tracks']:
+		print(track['name'])
 	Compare.comparisonScore(user1, user2)
 	# session.clear()
-	session.clear()
+	# session.clear()
 	return str(Compare.comparisonStats(user1, user2))
 
 if __name__ == '__main__':
