@@ -127,3 +127,24 @@ def compareScoreV2(user1, user2):
 
 	print("Proportion, avg dist: ", proportion_matching, avg_distance)
 	return proportion_matching * avg_distance
+
+
+
+def compareScoreV3(user1, user2):
+	tracks1 = user1.top_50_tracks()
+	tracks2 = user2.top_50_tracks()
+	
+	total_compats = []
+	for t1 in tracks1:
+		compats = []
+		for t2 in tracks2:
+			compats.append(t1.compareSong(t2))
+		total_compats.append(max(compats))
+
+	for t2 in tracks2:
+		compats = []
+		for t1 in tracks1:
+			compats.append(t2.compareSong(t1))
+		total_compats.append(max(compats))
+
+	return (sum(total_compats) / len(total_compats)) * 100
