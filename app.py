@@ -49,6 +49,7 @@ def play():
 	user2 = Spotify.Client(session['access_token_2'])
 	user1.get_top_x_artists(50)
 	print(user1.get_top_genres())
+	Compare.comparisonStats(user1, user2)
 	Compare.comparisonScore(user1, user2)
 	# session.clear()
 	session.clear()

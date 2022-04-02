@@ -54,6 +54,10 @@ class Client:
 					break
 		genres = []
 
-		for genre in dict(itertools.islice(sorted_genres.items(), 5)).keys():
+		for genre in sorted_genres.keys():
 			genres.append(genre)
 		return genres
+
+	def get_recommendations(self, params):
+		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
+		print(r.json())
