@@ -67,22 +67,15 @@ def result():
 	top_genres1 = user1.get_top_genres()[1]
 	user2.get_top_x_artists(50)
 	top_genres2 = user2.get_top_genres()[1]
-	print(top_genres1)
-	print(top_genres2)
 	process_genres1 = Compare.simplify_genres(top_genres1)
 	process_genres2 = Compare.simplify_genres(top_genres2)
-	print(process_genres1)
-	print(process_genres2)
-	print(Compare.compare_genre_score(process_genres1, process_genres2))
 
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
 	#data['compatibility'] = round(Compare.comparisonScore(user1, user2))
 	genre_compatibility = round(Compare.compare_genre_score(process_genres1, process_genres2))
 	analysis_compatibility = round(Compare.comparisonScore(user1, user2))
-	print(analysis_compatibility)
-	print(genre_compatibility)
-	compatibility = round(((2.25* analysis_compatibility) + (1 * genre_compatibility)) / 3.25)
+	compatibility = round(((1.6* analysis_compatibility) + (1 * genre_compatibility)) / 2.6)
 	data['compatibility'] = compatibility
 	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
@@ -94,14 +87,12 @@ def result():
 	ids = []
 
 
-
 	# playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	# playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
 	# user1.add_tracks_to_playlist(tracksdata, playlist)
 	# user2.add_tracks_to_playlist(tracksdata, playlist2)
-
 
 
 	# tracks = user1.top_50_tracks()
