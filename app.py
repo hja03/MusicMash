@@ -97,7 +97,7 @@ def result():
 	user1.add_tracks_to_playlist(tracksdata, playlist)
 	user2.add_tracks_to_playlist(tracksdata, playlist2)
 
-
+	data['playlist_url'] = playlist2['external_urls']['spotify']
 
 	session.clear()
 	return render_template('home.html', data=data)
