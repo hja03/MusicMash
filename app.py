@@ -1,3 +1,5 @@
+import copy
+
 from flask import Flask, request, session, render_template, jsonify, url_for, flash, redirect, Response
 from datetime import timedelta
 import hashlib
@@ -9,7 +11,7 @@ import Compare
 import Spotify
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "secfretsedy"  # random secret key refreshes session variables on run
+app.config['SECRET_KEY'] = "secfrefdtsdedy"  # random secret key refreshes session variables on run
 app.config['SESSION_TYPE']: 'filesystem'
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
@@ -61,10 +63,22 @@ def result():
 	user2 = Spotify.Client(session['access_token_2'])
 	data['name'] = [user1.name, user2.name]
 	data['top3'] = [user1.top_50_tracks(3), user2.top_50_tracks(3)]
-	data['top_genre'] = [user1.get_top_genres()[0], user2.get_top_genres()[0]]
+	data['top_genre'] = [user1.get_top_genres()[0][0], user2.get_top_genres()[0][0]]
+
+	user1.get_top_x_artists(50)
+	top_genres1 = user1.get_top_genres()[1]
+	user2.get_top_x_artists(50)
+	top_genres2 = user2.get_top_genres()[1]
+	print(top_genres1)
+	print(top_genres2)
+	process_genres1 = Compare.simplify_genres(top_genres1)
+	process_genres2 = Compare.simplify_genres(top_genres2)
+	print(Compare.compare_genre_score(process_genres1, process_genres2))
+
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
-	data['compatibility'] = round(Compare.comparisonScore(user1, user2))
+	# data['compatibility'] = round(Compare.comparisonScore(user1, user2))
+	data['compatibility'] = Compare.compare_genre_score(process_genres1, process_genres2)
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	track_art = []
 	for track in tracks['tracks']:
@@ -79,14 +93,18 @@ def result():
 	playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
-	user1.add_tracks_to_playlist(tracksdata, playlist)
-	user2.add_tracks_to_playlist(tracksdata, playlist2)
+	# user1.add_tracks_to_playlist(tracksdata, playlist)
+	# user2.add_tracks_to_playlist(tracksdata, playlist2)
 
 
 
 	# tracks = user1.top_50_tracks()
 	session.clear()
 	return render_template('home.html', data=data)
+
+# @app.route('/write-playlist')
+# def write_playlist():
+#
 
 if __name__ == '__main__':
 	app.run()

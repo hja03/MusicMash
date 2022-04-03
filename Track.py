@@ -37,6 +37,12 @@ class Track:
 
 		return compatibility
 
+	def __eq__(self, other):
+		return self.name == other.name
+
+	def __hash__(self):
+		return hash(self.name)
+
 
 class top50Tracks:
 	def __init__(self, listOfTop50Tracks):
@@ -54,3 +60,4 @@ class top50Tracks:
 				maxCompat = compat
 
 		return maxCompat
+
