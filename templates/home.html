@@ -36,6 +36,33 @@
                 </div>
 
             </div>
+
+            <!-- attributes -->
+            <div class="attributes">
+                <div class="progress" style="width: 50%"></div>
+                <div class="tooltip">Acousticness</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: 50%"></div>
+                <div class="tooltip">Dancability</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: 60%"></div>
+                <div class="tooltip">Energy</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: 30%"></div>
+                <div class="tooltip">Tempo</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: 70%"></div>
+                <div class="tooltip">Positivity</div>
+            </div>
+
         </div>
 
         <!-- middle pane -->
@@ -77,11 +104,11 @@
         <!-- right pane -->
         <div id="right-pane">
             <div id="right-user-wrapper" class="user-wrapper">
-                
+
                 <!-- user info -->
                 <img class="profile-img" src="{{ data['usr_img'][1] }}">
                 <div class="username">{{ data['name'][1] }}</div>            </div>
-            
+
                 <!-- main stats -->
                 <div class="main-stats">
                 <div class="top-songs"># Top Songs</div>
@@ -90,11 +117,37 @@
                     <div class="number">{{ num }}</div>
                     <div class="song-name">{{ track.name }}</div>
                 </div>
-                    {% endfor %}
+                {% endfor %}
 
+                <!-- attributes -->
                 <div class="top-genre"># Top Genre</div>
                 <div class="genre">
                     <span>{{ data['top_genre'][1] }}</span>
+                </div>
+
+                <div class="attributes">
+                    <div class="progress" style="width: 10%"></div>
+                    <div class="tooltip">Acousticness</div>
+                </div>
+
+                <div class="attributes">
+                    <div class="progress" style="width: 90%"></div>
+                    <div class="tooltip">Dancability</div>
+                </div>
+
+                <div class="attributes">
+                    <div class="progress" style="width: 30%"></div>
+                    <div class="tooltip">Energy</div>
+                </div>
+
+                <div class="attributes">
+                    <div class="progress" style="width: 50%"></div>
+                    <div class="tooltip">Tempo</div>
+                </div>
+
+                <div class="attributes">
+                    <div class="progress" style="width: 20%"></div>
+                    <div class="tooltip">Positivity</div>
                 </div>
 
             </div>

@@ -13,7 +13,6 @@
 body {
     margin: 0;
     padding: 0;
-    /* background-color: #221F20; */
     background-color: var(--secondary-color);
 }
 
@@ -27,7 +26,6 @@ body {
 }
 
 .user-wrapper {
-    /* background-color: red; */
     display: flex;
     margin: 2vh;
 }
@@ -137,6 +135,7 @@ body {
         var(--secondary-color) 1vh,
         var(--secondary-color) 2vh
     );
+    margin-bottom: 3vh;
 }
 
 .genre span {
@@ -213,6 +212,37 @@ body {
 .preview-row img:nth-child(2) {
     margin-left: 1vh;
     margin-right: 1vh;
+}
+
+.attributes {
+    margin: 1vh;
+    font-family: gotham;
+    font-size: 3vh;
+    height: 4vh;
+    background-color: var(--primary-color);
+    padding: 1vh;
+    position: relative;
+}
+
+.attributes:hover .tooltip {
+    display: block;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.tooltip {
+    position: absolute;
+    font-family: gotham;
+    font-size: 3vh;
+    left: 2vh;
+    top: -.75vh;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    /* display: none; */
+    padding: 0 1vh 0 1vh;
 }
 
 @keyframes radiate {
