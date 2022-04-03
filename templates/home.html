@@ -26,13 +26,13 @@
                 {% for num, track in data['top_tracks'][0] %}
                 <div class="top-song">
                     <div class="number">{{ num }}</div>
-                    <div class="song-name">{{ track.name }}</div>
+                    <div class="song-name" onclick="window.open('{{ track.url }}', '_blank')">{{ track.name }}</div>
                 </div>
                     {% endfor %}
 
                 <div class="top-genre"># Top Genre</div>
                 <div class="genre">
-                    <span>{{ data['top_genre'][0] }}</span>
+                    <span>{{ data['top_genre'][1] }}</span>
                 </div>
 
             </div>
@@ -43,7 +43,7 @@
 
             <!-- compatability score -->
             <div id="compatabiltiy">
-                <div id="compat-label">compatable</div>
+                <div id="compat-label">compatibility</div>
                 {{ data['compatibility'] }}<span>%</span>
             </div>
 
@@ -90,6 +90,7 @@
                 <div class="genre">
                     <span>{{ data['top_genre'][1] }}</span>
                 </div>
+
             </div>
         </div>
 

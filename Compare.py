@@ -16,7 +16,7 @@ def comparisonScore(user1, user2):
 		vector1[2] += track.energy
 		vector1[3] += track.tempo
 		vector1[4] += track.valence
-	vector1 = [x / len(tracks1) for x in vector1]
+	vector1 = [x / 50 for x in vector1]
 
 	vector2 = [0,0,0,0,0]
 	for track in tracks2:
@@ -25,7 +25,7 @@ def comparisonScore(user1, user2):
 		vector2[2] += track.energy
 		vector2[3] += track.tempo
 		vector2[4] += track.valence
-	vector2 = [x / len(tracks2) for x in vector2]
+	vector2 = [x / 50 for x in vector2]
 
 	compatability = 0
 	for i in range(5):
@@ -64,11 +64,11 @@ def comparisonStats(user1, user2):
 
 	for index, stat in enumerate(stats):
 		u1_min = min(vector1[index])
-		u1_avg = sum(vector1[index]) / len(vector1)
+		u1_avg = sum(vector1[index]) / 50
 		u1_max = max(vector1[index])
 
 		u2_min = min(vector2[index])
-		u2_avg = sum(vector2[index]) / len(vector2)
+		u2_avg = sum(vector2[index]) / 50
 		u2_max = max(vector2[index])
 
 		output["min_" + stat] = min(u1_min, u2_min)
@@ -123,8 +123,8 @@ def compareScoreV2(user1, user2):
 			if t1.genre == t2.genre:
 				matching.append(t1.compareSong(t2))
 
-	proportion_matching = len(matching) / (len(tracks1)*len(tracks2))
-	avg_distance = sum(matching)  / (len(tracks1)*len(tracks2))
+	proportion_matching = len(matching) / (50**2)
+	avg_distance = sum(matching)  / (50**2)
 
 	print("Proportion, avg dist: ", proportion_matching, avg_distance)
 	return proportion_matching * avg_distance
@@ -148,13 +148,7 @@ def compareScoreV3(user1, user2):
 			compats.append(t2.compareSong(t1))
 		total_compats.append(max(compats))
 
-	score = (sum(total_compats) / len(total_compats))
-	score = (0.3633 * math.exp(1.341 * score)) - 0.3664
-	score *= 100
-
-	score = min(100, score)
-
-	return score
+	return (sum(total_compats) / len(total_compats)) * 100
 
 def sortTracksByCompat(tracks_json_in, user1, user2):
 		tracks_json = tracks_json_in['tracks']
@@ -183,7 +177,7 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 			vector1[2] += track.energy
 			vector1[3] += track.tempo
 			vector1[4] += track.valence
-		vector1 = [x / len(tracks1) for x in vector1]
+		vector1 = [x / 50 for x in vector1]
 
 		vector2 = [0,0,0,0,0]
 		for track in tracks2:
@@ -192,7 +186,7 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 			vector2[2] += track.energy
 			vector2[3] += track.tempo
 			vector2[4] += track.valence
-		vector2 = [x / len(tracks2) for x in vector2]
+		vector2 = [x / 50 for x in vector2]
 
 		u1vector = Track(vector1[0], vector1[1],vector1[2],vector1[3],vector1[4], -1)
 		u2vector = Track(vector2[0], vector2[1],vector2[2],vector2[3],vector2[4], -1)
@@ -210,4 +204,5 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 				if track.trackID == json_track['id']:
 					actual_json_data.append(json_track)
 
-		return actual_json_data
+		print("HEREISMYSORTED JSON DATA \n\n\n\n\n\n")
+		print(actual_json_data)

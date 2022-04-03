@@ -3,6 +3,7 @@ import itertools
 from Track import Track
 import requests
 from Artist import Artist
+import json
 
 class Client:
 	def __init__(self, access_token):
@@ -22,17 +23,19 @@ class Client:
 						 params={'limit': limit})
 		self.tracks = []
 		self.track_names = []
+		self.track_urls = []
 		for i in r.json()["items"]:
 			self.tracks.append(i['id'])
 			self.track_names.append(i['name'])
+			self.track_urls.append(i['external_urls']['spotify'])
 		self.tracks_str = ",".join(self.tracks)
 		r = requests.get('http://api.spotify.com/v1/audio-features', headers=self.headers,
 						 params={'ids': self.tracks_str})
 		i = 0
 		self.track_objs = []
-		for track, track_name in zip(r.json()['audio_features'], self.track_names):
+		for track, track_name, track_url in zip(r.json()['audio_features'], self.track_names, self.track_urls):
 			track_obj = Track(track['danceability'], track['energy'], track['acousticness'], track['valence'],
-							  track['tempo'], track['id'], name=track_name)
+							  track['tempo'], track['id'], name=track_name, url=track_url)
 			self.track_objs.append(track_obj)
 		return self.track_objs
 
@@ -76,6 +79,7 @@ class Client:
 
 
 	def create_playlist(self, name, description):
-		params = {'name':name, 'description':description}
+		params = {'name': 'name', 'description': 'description'}
 		user_id = self.id
-		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, params=params)
+		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, data=json.dumps(params))
+

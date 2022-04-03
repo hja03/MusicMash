@@ -1,10 +1,5 @@
 /* main page */
 
-/* 
-- attribute scores
-- generate playlist button
-*/
-
 :root {
     --primary-color: black;
     --secondary-color: white;
@@ -167,6 +162,7 @@ body {
     text-overflow: ellipsis;
     text-transform: uppercase;
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 #generate-button {
