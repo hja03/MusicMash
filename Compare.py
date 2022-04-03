@@ -222,6 +222,7 @@ def simplify_genres(genres):
 def compare_genre_score(g1, g2):
 	genres_len = len(g1.keys())
 	genres_len += len(g2.keys())
+	
 	g1_total = 0
 	g2_total = 0
 	compatibility = 0
@@ -232,10 +233,12 @@ def compare_genre_score(g1, g2):
 	total_total = g1_total + g2_total
 	for key in g1.keys():
 		if key in g2.keys():
-			compatibility += (g1[key] / g1_total) / (g1_total / g2_total)
-			compatibility += (g2[key] / g2_total) / (g1_total / g2_total)
+			compatibility += (g1[key] / g1_total) * (g2[key] / g2_total)
+			#compatibility += (g1[key] / g1_total) / (g1_total / g2_total)
+			#compatibility += (g2[key] / g2_total) / (g1_total / g2_total)
 	# compatibility /= 1/total_total
-	compatibility *= 50
+	#compatibility *= 50
+	compatibility *= 100
 	return compatibility
 
 
