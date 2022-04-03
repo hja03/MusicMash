@@ -74,8 +74,11 @@ class Client:
 
 	def get_recommendations(self, params):
 		params = params
+		print(params)
 		params['limit'] = 50
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
+		print("got x tracks from get reccomendations: ", len(r.json()['tracks']))
+		print("get rec status code: ", r.status_code)
 		return r.json()
 
 	def create_playlist(self, name, description):
@@ -83,10 +86,10 @@ class Client:
 		user_id = self.id
 		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers,
 						  data=json.dumps(params))
-
 		return r.json()
 
 	def add_tracks_to_playlist(self, tracks, playlist):
+		print("been given: ", len(tracks))
 		tracks_strings = []
 		for track in tracks:
 			tracks_strings.append("spotify:track:" + track['id'])
