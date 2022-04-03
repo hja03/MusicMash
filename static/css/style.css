@@ -28,6 +28,7 @@ body {
 #left-pane, #middle-pane, #right-pane {
     width: calc(100vw / 3);
     height: 100vh;
+    overflow: scroll;
 }
 
 .user-wrapper {
@@ -49,6 +50,9 @@ body {
     font-family: gotham;
     margin-left: 2vh;
     color: var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #left-pane {
