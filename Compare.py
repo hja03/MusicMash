@@ -34,7 +34,8 @@ def comparisonScore(user1, user2):
 	compatability = math.sqrt(compatability)
 
 	compatability = 1 - compatability
-	compatability = 1 / (1 + math.exp(-10 * (compatability - 0.3)))
+	compatability =  math.sin((math.pi / 2) * (compatability-1)) + 1
+	#compatability = 1 / (1 + math.exp(-10 * (compatability - 0.3)))
 	compatability *= 100
 
 
@@ -73,8 +74,8 @@ def comparisonStats(user1, user2):
 		u2_max = max(vector2[index])
 
 		output["target_" + stat] = (u1_avg + u2_avg) / 2
-		output["min_" + stat] = (min(u1_min, u2_min) + ((u1_avg + u2_avg)/ 2)) / 2
-		output["max_" + stat] = (max(u1_max, u2_max) + ((u1_avg + u2_avg)/ 2)) / 2
+		output["min_" + stat] = (min(u1_min, u2_min) + ((u1_avg + u2_avg) / 2)) / 2
+		output["max_" + stat] = (max(u1_max, u2_max) + ((u1_avg + u2_avg) / 2)) / 2
 
 	output["min_tempo"] = output["min_tempo"] * 200
 	output["target_tempo"] = output["target_tempo"] * 200
@@ -96,9 +97,9 @@ def comparisonStats(user1, user2):
 	u1genres = user1.get_top_genres()
 	u2genres = user2.get_top_genres()
 
-	genres.append(u1genres[0])
+	genres.append(u1genres[0][0])
 	#genres.append(u1genres[1])
-	genres.append(u2genres[0])
+	genres.append(u2genres[0][0])
 	#genres.append(u2genres[1])
 
 
@@ -108,7 +109,7 @@ def comparisonStats(user1, user2):
 	#artists.append(u2artists[1].id)
 
 	output["seed_artists"] = ",".join(artists)
-	output["seed_genres"] = ",".join(artists)
+	output["seed_genres"] = ",".join(genres)
 	output["seed_tracks"] = ",".join(songs)
 
 	return output
@@ -178,7 +179,7 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 			vector1[2] += track.energy
 			vector1[3] += track.tempo
 			vector1[4] += track.valence
-		vector1 = [x / 50 for x in vector1]
+		vector1 = [x / len(tracks1) for x in vector1]
 
 		vector2 = [0,0,0,0,0]
 		for track in tracks2:
@@ -187,7 +188,7 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 			vector2[2] += track.energy
 			vector2[3] += track.tempo
 			vector2[4] += track.valence
-		vector2 = [x / 50 for x in vector2]
+		vector2 = [x / len(tracks2) for x in vector2]
 
 		u1vector = Track(vector1[0], vector1[1],vector1[2],vector1[3],vector1[4], -1)
 		u2vector = Track(vector2[0], vector2[1],vector2[2],vector2[3],vector2[4], -1)
@@ -237,4 +238,18 @@ def compare_genre_score(g1, g2):
 	compatibility *= 50
 	return compatibility
 
+
+
+
+def get_attributes(user):
+	tracks1 = user.track_objs
+	vector1 = [0,0,0,0,0]
+	for track in tracks1:
+		vector1[0] += track.acousticness
+		vector1[1] += track.danceability
+		vector1[2] += track.energy
+		vector1[3] += track.tempo
+		vector1[4] += track.valence
+	vector1 = [(x / len(tracks1)) * 100 for x in vector1]
+	return vector1
 

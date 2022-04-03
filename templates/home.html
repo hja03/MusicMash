@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MusicMash</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js"></script>
 </head>
@@ -36,6 +36,33 @@
                 </div>
 
             </div>
+
+            <!-- attributes -->
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][0][0] }}%"></div>
+                <div class="tooltip">Acousticness</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][0][1] }}%"></div>
+                <div class="tooltip">Danceability</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][0][2] }}%"></div>
+                <div class="tooltip">Energy</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][0][3] }}%"></div>
+                <div class="tooltip">Tempo</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][0][4] }}%"></div>
+                <div class="tooltip">Positivity</div>
+            </div>
+
         </div>
 
         <!-- middle pane -->
@@ -77,11 +104,11 @@
         <!-- right pane -->
         <div id="right-pane">
             <div id="right-user-wrapper" class="user-wrapper">
-                
+
                 <!-- user info -->
                 <img class="profile-img" src="{{ data['usr_img'][1] }}">
                 <div class="username">{{ data['name'][1] }}</div>            </div>
-            
+
                 <!-- main stats -->
                 <div class="main-stats">
                 <div class="top-songs"># Top Songs</div>
@@ -90,12 +117,38 @@
                     <div class="number">{{ num }}</div>
                     <div class="song-name">{{ track.name }}</div>
                 </div>
-                    {% endfor %}
+                {% endfor %}
 
                 <div class="top-genre"># Top Genre</div>
                 <div class="genre">
                     <span>{{ data['top_genre'][1] }}</span>
                 </div>
+
+            <!-- attributes -->
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][1][0] }}%"></div>
+                <div class="tooltip">Acousticness</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][1][1] }}%"></div>
+                <div class="tooltip">Danceability</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][1][2] }}%"></div>
+                <div class="tooltip">Energy</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][1][3] }}%"></div>
+                <div class="tooltip">Tempo</div>
+            </div>
+
+            <div class="attributes">
+                <div class="progress" style="width: {{ data['attributes'][1][4] }}%"></div>
+                <div class="tooltip">Positivity</div>
+            </div>
 
             </div>
         </div>
