@@ -10,6 +10,11 @@
 	src: url('../assets/Gotham-Black.otf');
 }
 
+@font-face {
+	font-family: 'gotham-italic';
+	src: url('../assets/Gotham-UltraItalic.otf');
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -224,9 +229,9 @@ body {
     position: relative;
 }
 
-.attributes:hover .tooltip {
+/* .attributes:hover .tooltip {
     display: block;
-}
+} */
 
 .progress {
     height: 100%;
@@ -241,17 +246,7 @@ body {
     top: -.75vh;
     color: var(--secondary-color);
     background-color: var(--primary-color);
-    /* display: none; */
     padding: 0 1vh 0 1vh;
-}
-
-@keyframes radiate {
-    from {
-        box-shadow: 0 0 0 0 black;
-    }
-    to {
-        box-shadow: 0 0 0 5vh rgba(0,0,0,0);
-    }
 }
 
 #credits {
@@ -269,8 +264,12 @@ body {
 #login-title {
     font-family: gotham;
     font-size: 5vh;
-    color: #D5F478;
-    width: 100vw;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    padding: 1vh 2vh 1vh 2vh;
+    display: inline-block;
+    margin-left: 50vw;
+    transform: translate(-50%);
     text-align: center;
     margin-top: 10vh;
 }
@@ -286,6 +285,8 @@ body {
     border-radius: 7vh;
     animation: 1.5s ease 1s infinite radiate;
     user-select: none;
+    background: #57B560;
+    border: 1vh solid var(--secondary-color);
 }
 
 #login-img {
@@ -293,5 +294,25 @@ body {
 }
 
 #login-main {
-    background-color: #221F20;
+    background-color: var(--primary-color);
+}
+
+@keyframes radiate {
+    from {
+        box-shadow: 0 0 0 0 var(--secondary-color);
+    }
+    to {
+        box-shadow: 0 0 0 5vh rgba(255,255,255,0);
+    }
+}
+
+#login-logo {
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+    font-family: gotham-italic;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 5vh;
+    padding: 1vh 2vh 1vh 2vh;
 }
