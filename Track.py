@@ -37,6 +37,10 @@ class Track:
 
 		return compatibility
 
+	def printTracks(self):
+		for danceability, energy, acousticne, valence, trackID in zip(self.danceability, self.energy, self.acousticness, self.valence, self.trackID):
+			print("danceability: ", danceability, "Energy: ", energy, "acousticness: ",acousticne, "valence: ", valence, "trackID: ", trackID)
+
 	def __eq__(self, other):
 		return self.name == other.name
 
@@ -59,5 +63,4 @@ class top50Tracks:
 			if compat > maxCompat:
 				maxCompat = compat
 
-		return maxCompat
-
+			return maxCompat
