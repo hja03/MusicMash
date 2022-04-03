@@ -51,15 +51,21 @@
             <div class="preview-pl"># Playlist Preview</div>
 
             <div class="preview-row">
-                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_14b.jpg">
-                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_1a.jpg">
-                <img src="http://pm1.narvii.com/7078/b516f075d0508fd60dcc727d02f742a2056940a7r1-984-984v2_uhq.jpg">
+                {% for i in range(3) %}
+                <img src="{{ data['track_art'][i] }}">
+                {% endfor %}
+{#                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_14b.jpg">#}
+{#                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_1a.jpg">#}
+{#                <img src="http://pm1.narvii.com/7078/b516f075d0508fd60dcc727d02f742a2056940a7r1-984-984v2_uhq.jpg">#}
             </div>
 
             <div class="preview-row">
-                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_5a.jpg">
-                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_7b.jpg">
-                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_9a.jpg">
+                {% for i in range(3,6) %}
+                <img src="{{ data['track_art'][i] }}">
+                {% endfor %}
+{#                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_5a.jpg">#}
+{#                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_7b.jpg">#}
+{#                <img src="https://www.wired.com/images_blogs/underwire/2010/06/lps_9a.jpg">#}
             </div>
 
             <!-- generate playlist -->
