@@ -5,6 +5,7 @@ import requests
 from Artist import Artist
 import json
 
+
 class Client:
 	def __init__(self, access_token):
 		self.access_token = access_token
@@ -69,7 +70,7 @@ class Client:
 
 		for genre in sorted_genres.keys():
 			genres.append(genre)
-		return genres
+		return genres, sorted_genres
 
 	def get_recommendations(self, params):
 		params = params
@@ -77,11 +78,11 @@ class Client:
 		r = requests.get('https://api.spotify.com/v1/recommendations', headers=self.headers, params=params)
 		return r.json()
 
-
 	def create_playlist(self, name, description):
 		params = {'name': name, 'description': description}
 		user_id = self.id
-		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, data=json.dumps(params))
+		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers,
+						  data=json.dumps(params))
 
 		return r.json()
 
@@ -91,4 +92,8 @@ class Client:
 			tracks_strings.append("spotify:track:" + track['id'])
 		params = {'uris': tracks_strings}
 		playlist_id = playlist['id']
-		r = requests.post(f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks", headers=self.headers, data=json.dumps(params))
+		r = requests.post(f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks", headers=self.headers,
+						  data=json.dumps(params))
+
+
+
