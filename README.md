@@ -1,4 +1,4 @@
-# Spotify Tinder
+# MusicMash
 
 ## Inspiration
 In the past, I have run into a conundrum where I get bored with my playlists from listening to the songs too much. This has led me to try the "Discover Weekly" playlist. However, this is a substandard fix as I only like a few of the songs, which is not enough to build an entire playlist. My friends and I have quite a similar music taste though, and I often end up asking for their playlists so I can listen to them myself and try something different. Once I told my group mates this problem, we thought to ourselves: "Surely we can combine both of our musics tastes and most listened to songs in order to build a playlist which we can both enjoy".
@@ -7,7 +7,7 @@ In the past, I have run into a conundrum where I get bored with my playlists fro
 It's a revolutionary web application. When you first open the application, you are greeted with a login page which lets you and your friends enter their Spotify account details. This then gives us access to the data about their account. We then use Spotify API to get data about their most listened to songs and artists. We use this data to calculate a compatibility score, which we show on a panel in the centre of the screen. There is also a button which creates a fusion playlist, which essentially uses a combination of inputs including your friend's top 50 songs and music tastes to create a playlist for both of you. It then adds this playlist to your Spotify account, where you will be able to find it.
 
 ## How we built it
-We built the back-end in Python using Flask, and we built the front end in HTML, CSS, and JavaScript. 
+We built the back-end in Python using Flask, and we built the front end in HTML, CSS, and JavaScript.
 
 ## How we did the data analysis
 ### The data
@@ -33,5 +33,3 @@ We learnt how the spotify API worked, got used to how git hub works and using it
 
 
 ## How we used to do the compatibility score
-
-
