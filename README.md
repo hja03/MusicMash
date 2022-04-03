@@ -11,19 +11,15 @@ We built the back-end in Python using Flask, and we built the front end in HTML,
 
 ### How we did the data analysis
 **The data**
-We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the Spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the genre of each of the songs.
+We get the most listened to songs from both of the users. Each of these songs has a multitude of attributes scored from 0-1 which we get from the Spotify API. We deemed the following attributes most important: danceability, energy, acousticness, valence, tempo. We also store the genre of each of the songs. We also analysed the genres and joined them together using more general genres to increase the accuracy of our calculations.
 
 **How we calculate the compatibility score**
 Explanation in graphical form. We plot all the songs in 5D space with the axis being danceability, energy, acouticness, valence and tempo. We  then go through all the songs in one of the user's top 50 and find the minimum distance on the 5D graph to one of the other user's top 50 songs.
 
-We find the average danceability, energy, acousticness, valence, tempo of all the top 50 songs for both of the users. Plot this on the 5d graph and find the eculidean distance between the average points of the two users. We then work out which genres match for each of the songs. 
-After this we calculate the proportion of the matching genres and compute a weighted sum of the 5D data and also the genre data.
+We find the average danceability, energy, acousticness, valence, tempo of all the top 50 songs for both of the users. Plot this on the 5D graph and find the eculidean distance between the average points of the two users. We then work out which genres match for each of the songs. 
+After this we we workout all the genres which both users listen to and then the number of songs in these genres. Then we use a weighted sum of the 5D euclidean distance and the matching-genre songs proportion. This gives us a number between 0-1 which we times by 100 to get the percentage shown on the panel.
 
- After this we calculate the Euclidean distance between all of the songs and store the minimum distance for each users song to another users songs. 
-
-This will give a number from 0-1. We then times this number by 100 and this is then displayed as the number as the compatibility number on the website.
-
-I have drawn a 2D representation of what the euclidian distance is:
+I have drawn a 2D representation of how we calculated the euclidean distance:
 ![](https://github.com/hja03/TopHackersAndShaggers/blob/main/2d%20representation.PNG)
 
 ### Challenges we ran into
