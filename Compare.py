@@ -200,3 +200,16 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 
 
 		return sorted_list
+
+def get_attributes(user):
+	tracks1 = user.track_objs
+	vector1 = [0,0,0,0,0]
+	for track in tracks1:
+		vector1[0] += track.acousticness
+		vector1[1] += track.danceability
+		vector1[2] += track.energy
+		vector1[3] += track.tempo
+		vector1[4] += track.valence
+	vector1 = [(x / len(tracks1)) * 100 for x in vector1]
+	return vector1
+

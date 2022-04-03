@@ -61,10 +61,12 @@ def result():
 	user2 = Spotify.Client(session['access_token_2'])
 	data['name'] = [user1.name, user2.name]
 	data['top3'] = [user1.top_50_tracks(3), user2.top_50_tracks(3)]
-	data['top_genre'] = [user1.get_top_genres()[0], user2.get_top_genres()[0]]
+	data['top_genre'] = [user1.get_top_genres()[0][0], user2.get_top_genres()[0][0]]
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
 	data['compatibility'] = round(Compare.comparisonScore(user1, user2))
+	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
+	print(data['attributes'])
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	track_art = []
 	for track in tracks['tracks']:
