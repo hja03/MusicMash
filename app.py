@@ -4,11 +4,12 @@ import hashlib
 import requests
 import base64
 
+import Graph
 import Compare
 import Spotify
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "secretsedy"  # random secret key refreshes session variables on run
+app.config['SECRET_KEY'] = "secfretsedy"  # random secret key refreshes session variables on run
 app.config['SESSION_TYPE']: 'filesystem'
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
@@ -67,9 +68,11 @@ def result():
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	ids = []
 
+	Graph.graph(user1.track_objs)
+
 	user1.create_playlist("name", "descript")
 	# tracks = user1.top_50_tracks()
-	# session.clear()
+	session.clear()
 	return render_template('home.html', data=data)
 
 if __name__ == '__main__':
