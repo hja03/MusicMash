@@ -3,7 +3,7 @@ from datetime import timedelta
 import hashlib
 import requests
 import base64
-
+import random
 import Graph
 import Compare
 import Spotify
@@ -82,29 +82,31 @@ def result():
 	analysis_compatibility = round(Compare.comparisonScore(user1, user2))
 	print(analysis_compatibility)
 	print(genre_compatibility)
-	compatibility = round(((2.25* analysis_compatibility) + (1 * genre_compatibility)) / 3.25)
+	compatibility = round(((1.6* analysis_compatibility) + (1 * genre_compatibility)) / 2.6)
 	data['compatibility'] = compatibility
 	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
-	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
+
 	track_art = []
-	for track in tracks['tracks']:
+	tracks1 = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))['tracks']
+	tracks2 = user2.get_recommendations(params=Compare.comparisonStats(user2, user1))['tracks']
+	tracks  = sorted((tracks1+tracks2), key=lambda k: random.random())[:50]
+	for track in tracks:
 		track_art.append(track['album']['images'][0]['url'])
 	data['track_art'] = track_art
-	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))['tracks']
 	ids = []
 
 
 
-	# playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
-	# playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
-	# user1.add_tracks_to_playlist(tracksdata, playlist)
-	# user2.add_tracks_to_playlist(tracksdata, playlist2)
+	user1.add_tracks_to_playlist(tracksdata, playlist)
+	user2.add_tracks_to_playlist(tracksdata, playlist2)
 
 
 
-	# tracks = user1.top_50_tracks()
+	tracks = user1.top_50_tracks()
 	session.clear()
 	return render_template('home.html', data=data)
 
