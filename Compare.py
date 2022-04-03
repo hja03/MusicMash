@@ -71,9 +71,9 @@ def comparisonStats(user1, user2):
 		u2_avg = sum(vector2[index]) / 50
 		u2_max = max(vector2[index])
 
-		output["min_" + stat] = min(u1_min, u2_min)
 		output["target_" + stat] = (u1_avg + u2_avg) / 2
-		output["max_" + stat] = max(u1_max, u2_max)
+		output["min_" + stat] = (min(u1_min, u2_min) + ((u1_avg + u2_avg)/ 2)) / 2
+		output["max_" + stat] = (max(u1_max, u2_max) + ((u1_avg + u2_avg)/ 2)) / 2
 
 	output["min_tempo"] = output["min_tempo"] * 200
 	output["target_tempo"] = output["target_tempo"] * 200
