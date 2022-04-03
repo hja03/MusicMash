@@ -167,6 +167,7 @@ body {
     text-overflow: ellipsis;
     text-transform: uppercase;
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 #generate-button {

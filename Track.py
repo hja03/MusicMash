@@ -4,7 +4,7 @@ import requests
 
 
 class Track:
-	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None, name=None):
+	def __init__(self, danceability, energy, acousticness, valence, tempo, trackID, genre=None, name=None, url=None):
 		self.danceability = danceability
 		self.energy = energy
 		self.acousticness = acousticness
@@ -14,6 +14,7 @@ class Track:
 		self.tempo = tempo / 200
 		self.genre = genre
 		self.name = name
+		self.url = url
 
 	def compareSong(self, otherPersonsSong):
 		compatibility = 0  # 0-100
