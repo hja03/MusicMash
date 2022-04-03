@@ -10,7 +10,6 @@ class Client:
 		self.access_token = access_token
 		self.headers = {'Authorization': f'Bearer {self.access_token}', 'Content-Type': 'application/json'}
 		r = requests.get('https://api.spotify.com/v1/me', headers=self.headers)
-		print(r.json())
 		self.name = r.json()['display_name']
 		self.img = r.json()['images']
 		self.id = r.json()['id']
@@ -22,7 +21,6 @@ class Client:
 	def top_50_tracks(self, limit=50):
 		r = requests.get('https://api.spotify.com/v1/me/top/tracks', headers=self.headers,
 						 params={'limit': limit})
-		print(r.json())
 		self.tracks = []
 		self.track_names = []
 		self.track_urls = []
@@ -84,4 +82,4 @@ class Client:
 		params = {'name': 'name', 'description': 'description'}
 		user_id = self.id
 		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, data=json.dumps(params))
-		print(r.status_code)
+
