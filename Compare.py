@@ -33,9 +33,9 @@ def comparisonScore(user1, user2):
 	compatability = math.sqrt(compatability)
 
 	compatability = 1 - compatability
+	compatability =  math.sin((math.pi / 2) * (compatability-1)) + 1
 	#compatability = 1 / (1 + math.exp(-10 * (compatability - 0.3)))
 	compatability *= 100
-
 
 	return compatability
 
@@ -71,9 +71,9 @@ def comparisonStats(user1, user2):
 		u2_avg = sum(vector2[index]) / 50
 		u2_max = max(vector2[index])
 
-		output["min_" + stat] = min(u1_min, u2_min)
 		output["target_" + stat] = (u1_avg + u2_avg) / 2
-		output["max_" + stat] = max(u1_max, u2_max)
+		output["min_" + stat] = (min(u1_min, u2_min) + ((u1_avg + u2_avg))) / 3
+		output["max_" + stat] = (max(u1_max, u2_max) + ((u1_avg + u2_avg))) / 3
 
 	output["min_tempo"] = output["min_tempo"] * 200
 	output["target_tempo"] = output["target_tempo"] * 200
@@ -95,9 +95,9 @@ def comparisonStats(user1, user2):
 	u1genres = user1.get_top_genres()
 	u2genres = user2.get_top_genres()
 
-	genres.append(u1genres[0])
+	genres.append(u1genres[0][0])
 	#genres.append(u1genres[1])
-	genres.append(u2genres[0])
+	genres.append(u2genres[0][0])
 	#genres.append(u2genres[1])
 
 

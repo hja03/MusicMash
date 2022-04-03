@@ -64,7 +64,7 @@ def result():
 	data['top_genre'] = [user1.get_top_genres()[0], user2.get_top_genres()[0]]
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
-	data['compatibility'] = round(Compare.compareScoreV3(user1, user2))
+	data['compatibility'] = round(Compare.comparisonScore(user1, user2))
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	track_art = []
 	for track in tracks['tracks']:
@@ -75,11 +75,12 @@ def result():
 
 
 
-	playlist = user1.create_playlist("Spotify Fusion", "Hackathon test playlist")
+	playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
 	user1.add_tracks_to_playlist(tracksdata, playlist)
-
+	user2.add_tracks_to_playlist(tracksdata, playlist2)
 
 
 
