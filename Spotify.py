@@ -83,3 +83,13 @@ class Client:
 		user_id = self.id
 		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, data=json.dumps(params))
 
+		return r.json()
+
+	def add_tracks_to_playlist(self, tracks, playlist):
+		tracks_strings = []
+		for track in tracks:
+			tracks_strings.append("spotify:track:" + track['id'])
+		params = {'uris': ",".join(tracks_strings)}
+		playlist_id = playlist['id']
+		r = requests.post(f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks", headers=self.headers, data=json.dumps(params))
+		print("Stat code: ", r.status_code)
