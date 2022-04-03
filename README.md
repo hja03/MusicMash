@@ -1,4 +1,6 @@
 # MusicMash
+Have you ever wanted to see how compatible you and your friends music tastes are?
+Music Mash will tell you your compatiblity score and even build a playlist combining both of your music tastes.
 
 ### Inspiration
 In the past, I have run into a conundrum where I get bored with my playlists from listening to the songs too much. This has led me to try the "Discover Weekly" playlist. However, this is a substandard fix as I only like a few of the songs, which is not enough to build an entire playlist. My friends and I have quite a similar music taste though, and I often end up asking for their playlists so I can listen to them myself and try something different. Once I told my group mates this problem, we thought to ourselves: "Surely we can combine both of our musics tastes and most listened to songs in order to build a playlist which we can both enjoy".
