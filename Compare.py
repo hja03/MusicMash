@@ -151,7 +151,7 @@ def compareScoreV3(user1, user2):
 	return (sum(total_compats) / len(total_compats)) * 100
 
 def sortTracksByCompat(tracks_json_in, user1, user2):
-		tracks_json = tracks_json_in['tracks']
+		tracks_json = tracks_json_in
 
 		ids = []
 		for track in tracks_json:
@@ -192,17 +192,12 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 		u2vector = Track(vector2[0], vector2[1],vector2[2],vector2[3],vector2[4], -1)
 
 		compat_track_dict = {}
-		for track in track_objs:
+		for json, track in zip(tracks_json, track_objs):
 			track_compat = track.compareSong(u1vector) * track.compareSong(u2vector)
-			compat_track_dict[track] = track_compat
+			compat_track_dict[track_compat] = json
 
-		sorted_list = [k for k, v in sorted(compat_track_dict.items(), key=lambda item: item[1])]
+		sorted_list = [v for k, v in sorted(compat_track_dict.items(), key=lambda item: item[0])]
 
-		actual_json_data = []
-		for track in sorted_list:
-			for json_track in tracks_json:
-				if track.trackID == json_track['id']:
-					actual_json_data.append(json_track)
 
-		print("HEREISMYSORTED JSON DATA \n\n\n\n\n\n")
-		print(actual_json_data)
+
+		return sorted_list

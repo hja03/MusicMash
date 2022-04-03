@@ -70,10 +70,19 @@ def result():
 	for track in tracks['tracks']:
 		track_art.append(track['album']['images'][0]['url'])
 	data['track_art'] = track_art
+	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))['tracks']
+	ids = []
 
-	# Graph.graph(user1.track_objs)
 
-	# user1.create_playlist("name", "descript")
+
+	playlist = user1.create_playlist("name", "descript")
+	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
+
+	user1.add_tracks_to_playlist(tracksdata, playlist)
+
+
+
+
 	# tracks = user1.top_50_tracks()
 	session.clear()
 	return render_template('home.html', data=data)
