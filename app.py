@@ -78,7 +78,12 @@ def result():
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
 	#data['compatibility'] = round(Compare.comparisonScore(user1, user2))
-	data['compatibility'] = round(Compare.compare_genre_score(process_genres1, process_genres2))
+	genre_compatibility = round(Compare.compare_genre_score(process_genres1, process_genres2))
+	analysis_compatibility = round(Compare.comparisonScore(user1, user2))
+	print(analysis_compatibility)
+	print(genre_compatibility)
+	compatibility = round(((2.25* analysis_compatibility) + (1 * genre_compatibility)) / 3.25)
+	data['compatibility'] = compatibility
 	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	track_art = []
@@ -90,12 +95,12 @@ def result():
 
 
 
-	playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
-	playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	# playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	# playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
-	user1.add_tracks_to_playlist(tracksdata, playlist)
-	user2.add_tracks_to_playlist(tracksdata, playlist2)
+	# user1.add_tracks_to_playlist(tracksdata, playlist)
+	# user2.add_tracks_to_playlist(tracksdata, playlist2)
 
 
 

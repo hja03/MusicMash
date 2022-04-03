@@ -233,7 +233,7 @@ def compare_genre_score(g1, g2):
 	total_total = g1_total + g2_total
 	for key in g1.keys():
 		if key in g2.keys():
-			compatibility += (g1[key] / g1_total) * (g2[key] / g2_total)
+			compatibility += min((g1[key] / g1_total), (g2[key] / g2_total))
 			#compatibility += (g1[key] / g1_total) / (g1_total / g2_total)
 			#compatibility += (g2[key] / g2_total) / (g1_total / g2_total)
 	# compatibility /= 1/total_total
