@@ -31,7 +31,7 @@ Our app is currently in development so spotify makes us manually authorize users
 We found it very diffucult to agree on a catchy name to brand our project. Eventually we agreed on MusicMash but it was a long process
 
 ### Accomplishments that we're proud of
-The main goal of this project was to help people connect and find shared interests 
+The main goal of this project was to help people connect though discovering shared interests and exploring new music together. We feel the fusion playlists combing 2 peoples tastes offer a unique opportunity to explore new sounds with another and the fascinating stats presented create great experience with friends.
 
 ### What we learned
 We learnt how the spotify API worked, got used to how git hub works and using it within the IDE and How to effictevly work as a team (delegating tasks and creating a fun and productive work environment).
