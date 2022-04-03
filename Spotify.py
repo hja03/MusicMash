@@ -79,7 +79,7 @@ class Client:
 
 
 	def create_playlist(self, name, description):
-		params = {'name': 'name', 'description': 'description'}
+		params = {'name': name, 'description': description}
 		user_id = self.id
 		r = requests.post(f"https://api.spotify.com/v1/users/{user_id}/playlists", headers=self.headers, data=json.dumps(params))
 
@@ -89,7 +89,6 @@ class Client:
 		tracks_strings = []
 		for track in tracks:
 			tracks_strings.append("spotify:track:" + track['id'])
-		params = {'uris': ",".join(tracks_strings)}
+		params = {'uris': tracks_strings}
 		playlist_id = playlist['id']
 		r = requests.post(f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks", headers=self.headers, data=json.dumps(params))
-		print("Stat code: ", r.status_code)

@@ -75,7 +75,7 @@ def result():
 
 
 
-	playlist = user1.create_playlist("name", "descript")
+	playlist = user1.create_playlist("Spotify Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
 	user1.add_tracks_to_playlist(tracksdata, playlist)
