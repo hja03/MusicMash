@@ -66,11 +66,14 @@ def result():
 	data['usr_img'] = [user1.img, user2.img]
 	data['compatibility'] = round(Compare.compareScoreV3(user1, user2))
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
-	ids = []
+	track_art = []
+	for track in tracks['tracks']:
+		track_art.append(track['album']['images'][0]['url'])
+	data['track_art'] = track_art
 
-	Graph.graph(user1.track_objs)
+	# Graph.graph(user1.track_objs)
 
-	user1.create_playlist("name", "descript")
+	# user1.create_playlist("name", "descript")
 	# tracks = user1.top_50_tracks()
 	session.clear()
 	return render_template('home.html', data=data)
