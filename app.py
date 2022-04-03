@@ -75,11 +75,12 @@ def result():
 
 
 
-	playlist = user1.create_playlist("Spotify Fusion", "Hackathon test playlist")
+	playlist = user1.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
+	playlist2 = user2.create_playlist(f"{user1.name} and {user2.name} Fusion", "Hackathon test playlist")
 	tracksdata = Compare.sortTracksByCompat(tracks, user1, user2)
 
 	user1.add_tracks_to_playlist(tracksdata, playlist)
-
+	user2.add_tracks_to_playlist(tracksdata, playlist2)
 
 
 
