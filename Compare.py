@@ -34,7 +34,7 @@ def comparisonScore(user1, user2):
 	compatability = math.sqrt(compatability)
 
 	compatability = 1 - compatability
-	compatability =  math.sin((math.pi / 2) * (compatability-1)) + 1
+	#compatability =  math.sin((math.pi / 2) * (compatability-1)) + 1
 	#compatability = 1 / (1 + math.exp(-10 * (compatability - 0.3)))
 	compatability *= 100
 
