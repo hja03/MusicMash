@@ -82,7 +82,7 @@ def result():
 	analysis_compatibility = round(Compare.comparisonScore(user1, user2))
 	print(analysis_compatibility)
 	print(genre_compatibility)
-	compatibility = round(((2.25* analysis_compatibility) + (1 * genre_compatibility)) / 3.25)
+	compatibility = round(((1.6* analysis_compatibility) + (1 * genre_compatibility)) / 2.6)
 	data['compatibility'] = compatibility
 	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
