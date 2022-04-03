@@ -295,6 +295,15 @@ body {
 
 #login-main {
     background-color: var(--primary-color);
+    /* background: repeating-linear-gradient(
+        -45deg,
+        var(--primary-color),
+        var(--primary-color) 1vh,
+        var(--secondary-color) 1vh,
+        var(--secondary-color) 2vh
+    );
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh; */
 }
 
 @keyframes radiate {
