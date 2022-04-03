@@ -2,6 +2,7 @@ import Spotify
 from Track import Track
 import math
 import requests
+import copy
 
 # idk if this works yet
 def comparisonScore(user1, user2):
@@ -36,6 +37,7 @@ def comparisonScore(user1, user2):
 	compatability =  math.sin((math.pi / 2) * (compatability-1)) + 1
 	#compatability = 1 / (1 + math.exp(-10 * (compatability - 0.3)))
 	compatability *= 100
+
 
 	return compatability
 
@@ -199,7 +201,45 @@ def sortTracksByCompat(tracks_json_in, user1, user2):
 		sorted_list = [v for k, v in sorted(compat_track_dict.items(), key=lambda item: item[0])]
 
 
+
 		return sorted_list
+
+def simplify_genres(genres):
+	simplified = ['pop', 'indie', 'jazz', 'rock', 'funk', 'jazz', 'dance', 'metal']
+	new_genres = copy.deepcopy(genres)
+	for genre in genres.keys():
+		for sub_genre in simplified:
+			if sub_genre in genre:
+				if sub_genre + '_add' in new_genres.keys():
+					new_genres[sub_genre + '_add'] += genres[genre] * 2
+				else:
+					new_genres[sub_genre + '_add'] = genres[genre] * 2
+	total_len = 0
+	for val in new_genres.values():
+		total_len += val
+	return new_genres
+
+def compare_genre_score(g1, g2):
+	genres_len = len(g1.keys())
+	genres_len += len(g2.keys())
+	g1_total = 0
+	g2_total = 0
+	compatibility = 0
+	for num in g1.values():
+		g1_total += num
+	for num in g2.values():
+		g2_total += num
+	total_total = g1_total + g2_total
+	for key in g1.keys():
+		if key in g2.keys():
+			compatibility += (g1[key] / g1_total) / (g1_total / g2_total)
+			compatibility += (g2[key] / g2_total) / (g1_total / g2_total)
+	# compatibility /= 1/total_total
+	compatibility *= 50
+	return compatibility
+
+
+
 
 def get_attributes(user):
 	tracks1 = user.track_objs

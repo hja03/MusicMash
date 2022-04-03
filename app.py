@@ -62,11 +62,20 @@ def result():
 	data['name'] = [user1.name, user2.name]
 	data['top3'] = [user1.top_50_tracks(3), user2.top_50_tracks(3)]
 	data['top_genre'] = [user1.get_top_genres()[0][0], user2.get_top_genres()[0][0]]
+
+	user1.get_top_x_artists(50)
+	top_genres1 = user1.get_top_genres()[1]
+	user2.get_top_x_artists(50)
+	top_genres2 = user2.get_top_genres()[1]
+	print(top_genres1)
+	print(top_genres2)
+	process_genres1 = Compare.simplify_genres(top_genres1)
+	process_genres2 = Compare.simplify_genres(top_genres2)
+	print(Compare.compare_genre_score(process_genres1, process_genres2))
+
 	data['top_tracks'] = [enumerate(user1.top_50_tracks(3), 1), enumerate(user2.top_50_tracks(3), 1)]
 	data['usr_img'] = [user1.img, user2.img]
 	data['compatibility'] = round(Compare.comparisonScore(user1, user2))
-	data['attributes'] = [Compare.get_attributes(user1), Compare.get_attributes(user2)]
-	print(data['attributes'])
 	tracks = user1.get_recommendations(params=Compare.comparisonStats(user1, user2))
 	track_art = []
 	for track in tracks['tracks']:
